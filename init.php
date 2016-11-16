@@ -44,7 +44,7 @@ error_reporting(E_ALL);
 
 
 $cor = "skin-blue";
-$Titulo = "Henry Controle de Estoque";
+$Titulo = "Interact Brasil";
 
 
 require_once 'functions.php';
