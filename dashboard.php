@@ -64,11 +64,10 @@ require_once 'QueryUser.php';
   </aside>
 <div class="content-wrapper">
  <section class="content-header">
-  <h1>Página Inicial<small><?php echo $titulo; ?></small></h1>
+  <h1>Página Inicial<small><?php echo $Titulo; ?></small></h1>
  </section>
  <section class="content">
   <div class="row">
-  <?php if ($permSup === "1") { ?>  
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="box box-widget widget-user">
      <div class="info-box">
@@ -93,7 +92,6 @@ require_once 'QueryUser.php';
      </div>                  
     </div>
    </div> 
-  <?php } else { } if ($permFw === "1") { ?>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="box box-widget widget-user">
      <div class="info-box">
@@ -106,7 +104,6 @@ require_once 'QueryUser.php';
      </div>                  
     </div>
    </div>
-   <?php } else { } if ($permRel === "1") { ?>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="box box-widget widget-user">
      <div class="info-box">
@@ -119,7 +116,6 @@ require_once 'QueryUser.php';
      </div>                  
     </div>
    </div>
-  <?php } else { } if ($permUsr === "1") { ?>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="box box-widget widget-user">
      <div class="info-box">
@@ -132,7 +128,6 @@ require_once 'QueryUser.php';
      </div>                  
     </div>
    </div> 
-  <?php } else { } ?>
  </section>
 </div><!-- CONTENT-WRAPPER -->
 <?php include_once 'footer.php'; ?>
