@@ -23,8 +23,8 @@ require_once 'QueryUser.php';
 <div class="wrapper">
  <header class="main-header">
   <a href="#" class="logo">
-   <span class="logo-mini"><img src="dist/img/logo/logoWhite.png" width="50"/></span>
-   <span class="logo-lg"><img src="dist/img/logo/logoWhite.png" width="180" /></span>
+   <span class="logo-mini"><img src="dist/img/logo/ICLogoMin.png" width="50"/></span>
+   <span class="logo-lg"><img src="dist/img/logo/ICLogoMini.png" width="180" /></span>
   </a>
   <nav class="navbar navbar-static-top">
    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -68,66 +68,9 @@ require_once 'QueryUser.php';
  </section>
  <section class="content">
   <div class="row">
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="box box-widget widget-user">
-     <div class="info-box">
-      <a href="atendimento/dashboard.php" >
-       <span class="info-box-icon bg-aqua">
-        <i class="fa fa-plus"></i>
-       </span>
-      </a>
-      <div class="info-box-content"><h4>ATENDIMENTOS</h4></div>
-     </div>                  
-    </div>
-   </div> 
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="box box-widget widget-user">
-     <div class="info-box">
-      <a href="revendas/dashboard.php" >
-       <span class="info-box-icon bg-red">
-        <i class="fa fa-newspaper-o"></i>
-       </span>
-      </a>
-      <div class="info-box-content"><h4>CADASTRO DE REVENDAS</h4></div>
-     </div>                  
-    </div>
-   </div> 
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="box box-widget widget-user">
-     <div class="info-box">
-      <a href="engenharia/dashboard.php" >
-       <span class="info-box-icon bg-green">
-        <i class="fa fa-file-code-o"></i>
-       </span>
-      </a>
-      <div class="info-box-content"><h4>CADASTRO DE EQUIPS.</h4></div>
-     </div>                  
-    </div>
-   </div>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="box box-widget widget-user">
-     <div class="info-box">
-      <a href="relatorios/dashboard.php" >
-       <span class="info-box-icon bg-orange">
-        <i class="fa fa-pie-chart"></i>
-       </span>
-      </a>
-      <div class="info-box-content"><h4>RELATÓRIOS</h4></div>
-     </div>                  
-    </div>
-   </div>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="box box-widget widget-user">
-     <div class="info-box">
-      <a href="usuarios/dashboard.php" >
-       <span class="info-box-icon bg-purple ">
-        <i class="fa fa-users"></i>
-       </span>
-      </a>
-      <div class="info-box-content"><h4>USU&Aacute;RIOS</h4></div>
-     </div>                  
-    </div>
-   </div> 
+
+
+ 
  </section>
 </div><!-- CONTENT-WRAPPER -->
 <?php include_once 'footer.php'; ?>
