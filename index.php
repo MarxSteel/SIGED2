@@ -15,7 +15,7 @@
  <div class="login-box">
   <div class="login-box-body">
    <p class="login-box-msg">
-    <img src="dist/img/logo/logoBlack.png" width="180">
+    <img src="dist/img/logo/ICBrasil_Direita.png" width="260">
     <?php
      if (isset($_GET["erro"])) {
       echo '<div class="alert alert-danger alert-dismissible">';
