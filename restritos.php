@@ -1,7 +1,7 @@
 <?php
 /* restritos.php */ 
 
-$titulo = "Henry Equipamentos e Sistemas - Plataforma de Rastreio";
+$titulo = "SIGED - Sistema Integrado de Gestão Distrital <<MDIO INTERACT BRASIL>>";
 $versao = "1.1.1";
 session_start();
 
