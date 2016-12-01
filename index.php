@@ -45,7 +45,7 @@
  </div>
  <p align="center">
   Copyright &copy; 2015-2016<br /> 
-  <b>Henry Equipamentos e Sistemas</b> - Todos os direitos reservados <br />
+  <b>MDIO Interact Brasil</b> - Todos os direitos reservados <br />
   Desenvolvido por Marquistei Medeiros
  </p>
 <script src="bootstrap/js/bootstrap.min.js"></script>
