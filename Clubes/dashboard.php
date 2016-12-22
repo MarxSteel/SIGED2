@@ -18,6 +18,8 @@ require_once '../QueryUser.php';
  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+   <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+
 </head>
 <body class="hold-transition skin-blue-light fixed sidebar-mini">
 <div class="wrapper">
@@ -81,6 +83,54 @@ require_once '../QueryUser.php';
      <div class="info-box-content"><br /><h4>Adicionar Club</h4></div>
     </div>
    </div>
+   <div class="col-xs-12">
+    <div class="nav-tabs-custom">
+     <ul class="nav nav-tabs pull-right">
+      <li class="active"><a href="#ativo" data-toggle="tab">CLUBES ATIVOS</a></li>
+      <li><a href="#inativo" data-toggle="tab">CLUBES INATIVOS</a></li>
+      <li class="pull-left header"><i class="fa fa-inbox"></i> Lista de Clubes</li>
+     </ul>
+     <div class="tab-content no-padding">
+      <div class="chart tab-pane active" id="ativo">
+       <table id="ativo" class="table table-hover table-striped table-responsive" cellspacing="0" width="100%">
+        <thead>
+         <tr>
+          <td>ID</td>
+          <td>Interact Club de:</td>
+          <td>Reuni&otilde;es</td>
+          <td>Presidente</td>
+          <td></td>
+         </tr>
+        </thead>
+        <tbody>
+         <?php
+          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='A'";
+           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
+           $ChamaAtivo->execute();
+            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
+            echo '<tr>';
+            echo '<td>' . $at["icbr_id"] . '</td>';
+            echo '<td>' . $at["icbr_Clube"] . '</td>';
+            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
+            echo '<td>' . $at["icbr_Presidente"] . '</td>';
+            echo '<td>';
+             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-search"></i></a>&nbsp;';
+             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
+             echo "'dClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-close"></i></a>&nbsp;';
+            echo "</td>";
+            echo '</tr>';
+               endwhile;
+         ?>
+        </tbody>
+       </table>
+      </div>
+      <div class="chart tab-pane" id="inativo">TESTE2</div>
+     </div>
+    </div>
+   </div>
    <?php
     }
     else {
@@ -109,5 +159,28 @@ require_once '../QueryUser.php';
 <script src="../dist/js/app.min.js"></script>
 <script src="../dist/js/pages/dashboard.js"></script>
 <script src="../dist/js/demo.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+<!-- AdminLTE for demo purposes -->
+<script>
+  $(function () {
+    $("#ativo").DataTable();
+    $("#Reteste1510").DataTable();
+    $("#RetesteAcesso").DataTable();
+  });
+</script>
+<script language="JavaScript">
+function abrir(URL) {
+ 
+  var width = 1000;
+  var height = 650;
+ 
+  var left = 99;
+  var top = 99;
+ 
+  window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+ 
+}
+</script>
 </body>
 </html>
