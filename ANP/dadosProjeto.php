@@ -7,7 +7,9 @@ $NomeProjeto = $Qry['pro_nome'];
 $AvenidaProjeto = $Qry['pro_avenida'];
 $ClubeProjeto = $Qry['pro_clube'];
 $StatusProjeto = $Qry['pro_status'];
-$DistritoProjeto = $Qry['icbr_distrito'];
+$DistritoProjeto = $Qry['pro_distrito'];
 $AndamentoProjeto = $Qry['pro_and'];
 $AbrangenciaProjeto = $Qry['pro_dimensao'];
+$DataCadastro = $Qry['pro_DataCadastro'];
 ?>
+

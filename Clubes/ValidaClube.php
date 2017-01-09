@@ -1,3 +1,4 @@
+
 <?php 
 $Dados = $PDO->prepare("SELECT * FROM icbr_clube WHERE icbr_id='$codClube'");
 $Dados->execute();
@@ -15,4 +16,4 @@ $clubeTesoureiro = $Qry['icbr_Tesoureiro'];
 
 
 
-  ?>
+  ?> 

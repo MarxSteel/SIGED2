@@ -4,7 +4,7 @@ require_once '../init.php';
 $codProjeto = $_GET['ID']; 
 $PDO = db_connect();
 require_once '../QueryUser.php';
-require_once 'chaveProjeto.php';
+require_once 'dadosProjeto.php';
 $DataAgora = date('d/m/Y H:i:s');
 $teste = "teste";
 
@@ -45,7 +45,7 @@ $teste = "teste";
      </div>
     </div>
    </nav>
-  </header>
+  </header> 
   <div class="content-wrapper">
    <div class="container">
     <section class="content">
@@ -56,30 +56,21 @@ $teste = "teste";
       <div class="box-body">
        <div class="col-xs-8">
         <li class="list-group-item">
-         <b>Rotary Club Patrocinador:</b> 
-         <a class="pull-right"><?php echo $teste; ?></i></a>
+         <b>Clube:</b> 
+         <a class="pull-right">Interact Club de <?php echo $ClubeProjeto . '<strong> (D. ' . $DistritoProjeto . ')</strong>'; ?></a>
         </li>
         <li class="list-group-item">
-         <b>Data de Fundação:</b> 
-         <a class="pull-right"><?php echo $teste; ?></strong></i></a>
+         <b>Data de Cadastro:</b> 
+         <a class="pull-right"><?php echo $DataCadastro; ?></strong></i></a>
         </li>
+       </div>
+       <div class="col-xs-4">
         <li class="list-group-item">
-         <b>Status:</b>
-         <a class="pull-right">
-         <?php 
-          if($StatusClub === 'A')
-          {
-            echo '<span class="btn btn-success btn-xs btn-block">ATIVO</span>';  
-          }
-          elseif($StatusClub === 'D')
-          {
-            echo '<span class="btn bg-orange btn-xs btn-block">INATIVO</span>';  
-          }
-          else{
-              
-          }
-         ?> </a>
+         <h2>INTERNOS</h2>
         </li>
+       </div>
+       <div class="col-xs-4 list-group-item">
+       teste
        </div>
        <div class="col-xs-12">
         <h2>DESEJA REALMENTE INATIVAR CLUBE ?</h2>
