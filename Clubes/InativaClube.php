@@ -5,7 +5,7 @@ $codClube = $_GET['ID'];
 $PDO = db_connect();
 require_once '../QueryUser.php';
 require_once 'ValidaClube.php';
-
+$DataAgora = date('d/m/Y H:i:s');
 $teste = "teste";
 
 ?>
@@ -58,15 +58,11 @@ $teste = "teste";
        <div class="col-xs-8">
         <li class="list-group-item">
          <b>Rotary Club Patrocinador:</b> 
-         <a class="pull-right"><?php echo $clubeRotary; ?></i>
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#TrocaRotary"><i class="fa fa-refresh"></i></button>
-         </a>
+         <a class="pull-right"><?php echo $clubeRotary; ?></i></a>
         </li>
         <li class="list-group-item">
          <b>Data de Fundação:</b> 
-         <a class="pull-right"><?php echo $clubeDataFundado; ?></strong></i>
-          <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#DataFundacao"><i class="fa fa-refresh"></i></button>
-         </a>
+         <a class="pull-right"><?php echo $clubeDataFundado; ?></strong></i></a>
         </li>
         <li class="list-group-item">
          <b>Status:</b>
@@ -86,71 +82,54 @@ $teste = "teste";
          ?> </a>
         </li>
        </div>
-       <div class="col-xs-4">
-        <li class="list-group-item">
-        </li>
+       <div class="col-xs-12">
+        <h2>DESEJA REALMENTE INATIVAR CLUBE ?</h2>
        </div>
-       <div class="col-xs-7">
-       <h5>
-        <button type="button" class="btn bg-purple btn-xs" data-toggle="modal" data-target="#AlteraReuniao"><i class="fa fa-refresh"></i></button>
-        INFORMAÇÕES DE REUNIÃO 
-       </h5>
-       <li class="list-group-item">
-       <strong> LOCAL: </strong> <?php echo $LocalClube; ?><br />
-        <strong>PERÍODO DE REUNIÕES: </strong> <?php echo $PeriodoClube; ?><br />
-        <strong>DIA DA SEMANA: </strong> <?php echo $DiaClube; ?><br />
-        <strong>HORÁRIO: </strong> <?php echo $HorarioClube; ?>
-       </li>
-       <h5>
-        <button type="button" class="btn bg-orange btn-xs" data-toggle="modal" data-target="#AlteraEndereco"><i class="fa fa-refresh"></i></button>
-        INFORMAÇÕES DE ENDERECO 
-       </h5>
-       <li class="list-group-item">
-        <strong>ENDEREÇO: </strong> <?php echo $EndClube; ?> <strong>, NUM.: </strong> <?php echo $EndNClube; ?><br />
-        <strong>BAIRRO/SETOR: </strong> <?php echo $BairroClube; ?><strong>, CEP: </strong><?php echo $BairroClube; ?><br />
-        <strong>CIDADE: </strong> <?php echo $CidadeClube; ?><strong>, UF: </strong><?php echo $UFClube; ?>
-       </li>
-       </div>
-       <div class="col-xs-5">
-        <h5>CONSELHO DIRETOR</h5>
+       <form name="ReativaClube" id="name" method="post" action="" enctype="multipart/form-data">
+        <div class="col-xs-12">Senha de Administrador
+         <input name="passRDI" type="password" required class="form-control" />
+        </div>
+        <div class="col-xs-12"><br />
+         <input name="ReativaClube" type="submit" class="btn btn-danger btn-lg btn-block" value="SIM, DESATIVAR CLUBE"  />
+        </div>
+       </form>
+       <?php 
+        if(@$_POST["ReativaClube"])
+        {
+         $SenhaRDI = $_POST['passRDI'];
+         $CryRDI = md5($SenhaRDI);
+         if ($CryRDI === $SenhaUsuarioLogado) 
+         {
+          $RotaryPadrinho = $_POST['RCPadrinho'];
+           $executa = $PDO->query("UPDATE icbr_clube SET icbr_Status='D' WHERE icbr_id='$codClube' ");
+           if($executa)
+           {
+            echo '<script type="text/javascript">alert("Clube Desativado com Sucesso!");</script>';
+            echo '<script type="text/javascript">window.close();</script>';
+           }
+           else
+           {
+            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL DESATUVAR O CLUBE. TIRE UM PRINT DESTA MENSAGEM E ENTRE EM CONTATO COM O ADMINISTRADOR");</script>';
+            echo '<script type="text/javascript">window.close();</script>';
+           }
+         }
+         else 
+         {
+          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+          echo '<script type="text/javascript">window.close();</script>';
+         }
+        }
+       ?>
        </div>  
-      <div class="col-xs-5">
-       <li class="list-group-item">
-        <b>PRESIDENTE: </b><?php echo $clubePresidente; ?>
-       </li>
-      </div>
-      <div class="col-xs-5"><br />
-       <li class="list-group-item">
-        <b>SECRETÁRIO: </b> <?php echo $clubeSecretario; ?>
-       </li>
-      </div>
-      <div class="col-xs-5"><br />
-       <li class="list-group-item">
-        <b>TESOUREIRO: </b> <?php echo $clubeTesoureiro; ?>
-       </li>
+      </li>
       </div>
       </div>
      </div>
     </section>
   </div>
- </div>
- <?php 
- include_once 'ModalDados.php';
- include_once '../footer.php'; ?></div>
+ </div><?php include_once '../footer.php'; ?></div>
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../dist/js/app.min.js"></script>
-<script>
-function formatar(mascara, documento){
-  var i = documento.value.length;
-  var saida = mascara.substring(0,1);
-  var texto = mascara.substring(i)
-  
-  if (texto.substring(0,1) != saida){
-            documento.value += texto.substring(0,1);
-  }
-  
-}
-</script>
 </body>
 </html>
