@@ -159,13 +159,10 @@ $teste = "teste";
          $CryRDI = md5($SenhaRDI);
          if ($CryRDI === $SenhaUsuarioLogado) 
          {
-          $AttStatus = $PDO->query("UPDATE icbr_projeto SET pro_status='3' WHERE id='$codProjeto'");
-           if ($AttStatus) 
-           {
             $DtLog = date('d/m/Y - H:i:s');
-            $NomeCodigo = "Projeto Cadastrado e chave enviada";
-            $DetalheCod = "Projeto cadastrado e enviada chave às " . $DtLog . " Pelo usuario " . $NomeUserLogado;
-            $SalvaLog = $PDO->query("INSERT INTO log_projeto (codigo, DataCadastro, UserCadastro, CodProjeto, NomeCodigo, DetalheCodigo) VALUES ('100', '$DtLog', '$NomeUserLogado', '$codProjeto', '$NomeCodigo', '$DetalheCod')");
+            $NomeCodigo = "Chave reenviada";
+            $DetalheCod = "Feito o reenvio de chave às " . $DtLog . " Pelo usuario " . $NomeUserLogado;
+            $SalvaLog = $PDO->query("INSERT INTO log_projeto (codigo, DataCadastro, UserCadastro, CodProjeto, NomeCodigo, DetalheCodigo) VALUES ('101', '$DtLog', '$NomeUserLogado', '$codProjeto', '$NomeCodigo', '$DetalheCod')");
             if ($SalvaLog) 
             {
 
@@ -202,14 +199,6 @@ $teste = "teste";
                    {
                     echo '<script type="text/javascript">alert("EMAIL ENVIADO COM SUCESSO!");</script>';
                   } 
-             echo '<script type="text/javascript">alert("CHAVE ENVIADA COM SUCESSO!");</script>';
-             echo '<script type="text/javascript">window.close();</script>';
-             }
-             else
-             {
-            echo '<script type="text/javascript">alert("ERRO 501: ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
-            echo '<script type="text/javascript">window.close();</script>';
-             }
            }
            else
            {
