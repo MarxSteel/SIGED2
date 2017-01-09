@@ -9,5 +9,5 @@
   $PrivTesouraria = $row['PTesouraria'];					//Privilégio para Acessar Tesouraria
   $PrivSecretaria = $row['PSecretaria'];					//Privilégio para Acessar Secretaria
   $PrivANP = $row['PANP'];									//Privilégios ANP
-
+  $SenhaUsuarioLogado = $row['senha'];
 ?>

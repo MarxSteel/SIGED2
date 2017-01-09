@@ -2,6 +2,7 @@
 require("../restritos.php"); 
 require_once '../init.php';
 $PrivClubes = "active";
+$cClubes = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
 ?>
@@ -18,6 +19,9 @@ require_once '../QueryUser.php';
  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+
+
 </head>
 <body class="hold-transition skin-blue-light fixed sidebar-mini">
 <div class="wrapper">
@@ -81,6 +85,109 @@ require_once '../QueryUser.php';
      <div class="info-box-content"><br /><h4>Adicionar Club</h4></div>
     </div>
    </div>
+   <div class="col-xs-12">
+    <div class="nav-tabs-custom">
+     <ul class="nav nav-tabs pull-right">
+      <li class="active"><a href="#ativos" data-toggle="tab">Clubes Ativos</a></li>
+      <li><a href="#inativos" data-toggle="tab">Clubes Inativos</a></li>
+     </ul>
+     <div class="tab-content">
+      <div class="tab-pane active" id="ativos">
+       <div class="box-header">
+        <h3 class="box-title">Lista de Clubes <strong>ATIVOS</strong> do <strong>Distrito <?php echo $Distrito; ?></strong></h3>
+       </div>
+       <div class="box-body">
+        <table id="clubesAtivo" class="table table-bordered table-striped">
+         <thead>
+          <tr>
+           <td width="10%"><strong>ID</strong></td>
+           <td width="35%"><strong>Interact Club de:</strong></td>
+           <td width="35%"><strong>Reuni&otilde;es</strong></td>
+           <td width="20%"></td>
+          </tr>
+         </thead>
+        <tbody>
+         <?php
+          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='A'";
+           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
+           $ChamaAtivo->execute();
+            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
+            echo '<tr>';
+            echo '<td>' . $at["icbr_id"] . '</td>';
+            echo '<td>' . $at["icbr_Clube"] . '</td>';
+            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
+            echo '<td>';
+             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-search"></i> VISUALIZAR</a>&nbsp;';
+             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
+             echo "'InativaClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-thumbs-down"></i> INATIVAR</a>&nbsp;';
+            echo "</td>";
+            echo '</tr>';
+            endwhile;
+         ?>
+        </tbody>
+         <tfoot>
+          <tr>
+           <td><strong>ID</strong></td>
+           <td><strong>Interact Club de:</strong></td>
+           <td><strong>Reuni&otilde;es</strong></td>
+           <td></td>
+          </tr>
+         </tfoot>
+        </table>
+       </div>
+      </div>
+      <div class="tab-pane" id="inativos">
+       <div class="box-header">
+        <h3 class="box-title">Lista de Clubes <strong>INATIVOS</strong> do <strong>Distrito <?php echo $Distrito; ?></strong></h3>
+       </div>
+       <div class="box-body">
+        <table id="clubesInativo" class="table table-bordered table-striped">
+         <thead>
+          <tr>
+           <td width="10%"><strong>ID</strong></td>
+           <td width="35%"><strong>Interact Club de:</strong></td>
+           <td width="35%"><strong>Reuni&otilde;es</strong></td>
+           <td width="20%"></td>
+          </tr>
+         </thead>
+        <tbody>
+         <?php
+          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='D'";
+           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
+           $ChamaAtivo->execute();
+            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
+            echo '<tr>';
+            echo '<td>' . $at["icbr_id"] . '</td>';
+            echo '<td>' . $at["icbr_Clube"] . '</td>';
+            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
+            echo '<td>';
+             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-search"></i> VISUALIZAR</a>&nbsp;';
+             echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
+             echo "'ReativaClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-thumbs-up"></i> REATIVAR</a>&nbsp;';
+            echo "</td>";
+            echo '</tr>';
+            endwhile;
+         ?>
+        </tbody>
+         <tfoot>
+          <tr>
+           <td><strong>ID</strong></td>
+           <td><strong>Interact Club de:</strong></td>
+           <td><strong>Reuni&otilde;es</strong></td>
+           <td></td>
+          </tr>
+         </tfoot>
+        </table>
+       </div>
+      </div>
+     </div>
+   </div>
    <?php
     }
     else {
@@ -98,16 +205,80 @@ require_once '../QueryUser.php';
   </div>
  </section>
 </div><!-- CONTENT-WRAPPER -->
-<?php include_once '../footer.php'; ?>
+<?php 
+include_once 'ModalDados.php';
+include_once '../footer.php'; 
+?>
 
 </div>
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
 <script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
 <script src="../plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
 <script src="../dist/js/app.min.js"></script>
-<script src="../dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+    $('#clubesAtivo').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+    $('#clubesInativo').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+<script language="JavaScript">
+function abrir(URL) {
+ 
+  var width = 1000;
+  var height = 650;
+ 
+  var left = 99;
+  var top = 99;
+ 
+  window.open(URL,'janela', 'width='+width+', height='+height+', top='+top+', left='+left+', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+ 
+}
+</script>
+<script>
+function formatar(mascara, documento){
+  var i = documento.value.length;
+  var saida = mascara.substring(0,1);
+  var texto = mascara.substring(i)
+  
+  if (texto.substring(0,1) != saida){
+            documento.value += texto.substring(0,1);
+  }
+  
+}
+</script>
 </body>
 </html>

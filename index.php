@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Henry Equipamentos - Controle de Estoque</title>
+  <title>SISTEMA INTEGRADO DE GESTÃO DISTRITAL - MDIO INTERACT BRASIL</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -45,7 +45,7 @@
  </div>
  <p align="center">
   Copyright &copy; 2015-2016<br /> 
-  <b>Henry Equipamentos e Sistemas</b> - Todos os direitos reservados <br />
+  <b>MDIO Interact Brasil</b> - Todos os direitos reservados <br />
   Desenvolvido por Marquistei Medeiros
  </p>
 <script src="bootstrap/js/bootstrap.min.js"></script>

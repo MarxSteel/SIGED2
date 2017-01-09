@@ -98,6 +98,26 @@ require_once 'QueryUser.php';
      <div class="info-box-content"><h4>Tesouraria</h4></div>
     </div>
    </div>
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a href="ANP/dashboard.php" >
+      <span class="info-box-icon bg-orange">
+       <i class="fa fa-file-text"></i>
+      </span>
+     </a>
+     <div class="info-box-content"><h4>Cadastro de Projetos</h4></div>
+    </div>
+   </div>
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a href="ANP/arquivo.php" >
+      <span class="info-box-icon bg-navy">
+       <i class="fa fa-list-alt"></i>
+      </span>
+     </a>
+     <div class="info-box-content"><h4>Arquivo Nacional de Projetos</h4></div>
+    </div>
+   </div>
  </section>
 </div><!-- CONTENT-WRAPPER -->
 <?php include_once 'footer.php'; ?>
