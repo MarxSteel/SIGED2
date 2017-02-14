@@ -47,7 +47,6 @@
          else 
          {
           echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
-          echo '<script type="text/javascript">window.close();</script>';
          }
         }
        ?>
@@ -470,6 +469,68 @@
  </div>
 </div>
 <!-- Cadastro de Novo Clube -->
+<!-- MODAL DE TROCA E-MAIL -->
+
+<div class="modal fade" id="NovoEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Troca de E-mail</h4>
+      </div>
+      <div class="modal-body">
+        <h3>E-Mail Atual: <strong><?php echo $clubeMail; ?></strong></h3>
+
+       <form name="NovoEmail" id="name" method="post" action="" enctype="multipart/form-data">
+        <div class="col-xs-8">Novo E-mail
+         <input name="MailNovo" type="mail" required class="form-control" placeholder="email@mail.com" />
+        </div>
+        <div class="col-xs-4">Senha de Administrador
+         <input name="passRDI" type="password" required class="form-control" />
+        </div>
+        <div class="modal-footer"><br /><br /><br />
+         <input name="NovoEmail" type="submit" class="btn btn-primary" value="Atualizar Cadastro"  />
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+       </form>
+       <?php 
+        if(@$_POST["NovoEmail"])
+        {
+         $SenhaRDI = $_POST['passRDI'];
+         $CryRDI = md5($SenhaRDI);
+         if ($CryRDI === $SenhaUsuarioLogado) 
+         {
+          $NovoMail = $_POST['MailNovo'];
+           $executa = $PDO->query("UPDATE icbr_clube SET icbr_ProjetoEmail='$NovoMail' WHERE icbr_id='$codClube' ");
+           if($executa)
+           {
+            echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
+              location.href="vClube.php?ID=' . $codClube . '"</script>';
+           }
+           else
+           {
+            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL ATUALIZAR CADASTRO, ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+            echo '<script type="text/javascript">window.close();</script>';
+           }
+         }
+         else 
+         {
+          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+         }
+        }
+       ?>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIM DO MODAL DE TROCA DE E-MAIL -->
+
+
+
+
+
 
 
 
