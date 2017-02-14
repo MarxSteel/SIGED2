@@ -110,7 +110,15 @@ require_once '../QueryUser.php';
            echo '<td>' . $at["id"] . '</td>';
            echo '<td>' . $at["pro_avenida"] . '</td>';
            echo '<td>' . $at["pro_nome"] . '</td>';
-           echo '<td>' . $at["pro_clube"] . '</td>';
+           echo '<td>';
+           $codClube = $at["pro_clube"];
+            $Dados = $PDO->prepare("SELECT * FROM icbr_clube WHERE icbr_id='$codClube'");
+            $Dados->execute();
+            $Qry = $Dados->fetch();
+           echo $Qry['icbr_Clube'];
+           echo '</td>';
+
+
             $StatusProjeto = $at["pro_status"];
              if ($StatusProjeto === '1') {
                echo '
