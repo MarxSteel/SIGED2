@@ -4,6 +4,7 @@ require_once '../init.php';
 $cANP = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
+include_once '../Clubes/ValidaClube.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,7 +75,7 @@ require_once '../QueryUser.php';
    <div class="col-xs-12">
     <div class="box box-danger color-palette-box">
      <div class="box-header with-border">
-      <h3 class="box-title"><i class="fa fa-file-text"></i> Lista de Projetos do Distrito <?php echo $Distrito; ?></h3>
+      <h3 class="box-title"><i class="fa fa-file-text"></i> Lista Geral de Projetos</h3>
      </div>
      <div class="box-body">
       <table id="ListaProjetos" class="table table-bordered table-striped">
@@ -98,7 +99,13 @@ require_once '../QueryUser.php';
            echo '<td>' . $at["id"] . '</td>';
            echo '<td>' . $at["pro_avenida"] . '</td>';
            echo '<td>' . $at["pro_nome"] . '</td>';
-           echo '<td>' . $at["pro_clube"] . '</td>';
+           echo '<td>';
+           $codClube = $at["pro_clube"];
+            $Dados = $PDO->prepare("SELECT * FROM icbr_clube WHERE icbr_id='$codClube'");
+            $Dados->execute();
+            $Qry = $Dados->fetch();
+           echo $Qry['icbr_Clube'];
+           echo '</td>';
             $StatusProjeto = $at["pro_and"];
             /*
             ANDAMENTO DO PROJETO:

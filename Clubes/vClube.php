@@ -58,7 +58,7 @@ $teste = "teste";
        <div class="col-xs-8">
         <li class="list-group-item">
          <b>Rotary Club Patrocinador:</b> 
-         <a class="pull-right"><?php echo $clubeRotary; ?></i>
+         <a class="pull-right"><?php echo $clubeRotary; ?> </i>
           <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#TrocaRotary"><i class="fa fa-refresh"></i></button>
          </a>
         </li>
@@ -107,10 +107,18 @@ $teste = "teste";
        </h5>
        <li class="list-group-item">
         <strong>ENDEREÇO: </strong> <?php echo $EndClube; ?> <strong>, NUM.: </strong> <?php echo $EndNClube; ?><br />
-        <strong>BAIRRO/SETOR: </strong> <?php echo $BairroClube; ?><strong>, CEP: </strong><?php echo $BairroClube; ?><br />
+        <strong>BAIRRO/SETOR: </strong> <?php echo $BairroClube; ?><strong>, CEP: </strong><?php echo $CEPClube; ?><br />
         <strong>CIDADE: </strong> <?php echo $CidadeClube; ?><strong>, UF: </strong><?php echo $UFClube; ?>
        </li>
        </div>
+      <div class="col-xs-5"><br >
+       <li class="list-group-item">
+        <b>E-Mail para Contato:</b> 
+        <a class="pull-right"><?php echo $clubeMail; ?> </i>
+         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#NovoEmail"><i class="fa fa-refresh"></i></button>
+        </a>
+       </li>
+      </div>
        <div class="col-xs-5">
         <h5>CONSELHO DIRETOR</h5>
        </div>  
