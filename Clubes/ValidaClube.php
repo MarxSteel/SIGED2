@@ -11,9 +11,15 @@ $StatusClub = $Qry['icbr_Status'];
 $clubePresidente = $Qry['icbr_Presidente'];
 $clubeSecretario = $Qry['icbr_Secretario'];
 $clubeTesoureiro = $Qry['icbr_Tesoureiro'];
-
-
-
-
-
-  ?> 
+$LocalClube = $Qry['icbr_Complemento'];
+$PeriodoClube = $Qry['icbr_Periodo'];
+$DiaClube = $Qry['icbr_Semana'];
+$HorarioClube = $Qry['icbr_Horario'];
+$EndClube = $Qry['icbr_CEnd'];
+$EndNClube = $Qry['icbr_CNum'];
+$BairroClube = $Qry['icbr_Bairro'];
+$CidadeClube = $Qry['icbr_Cidade'];
+$CEPClube = $Qry['icbr_CEP'];
+$UFClube = $Qry['icbr_UF'];
+$clubeMail = $Qry['icbr_ProjetoEmail'];
+?> 
