@@ -296,7 +296,8 @@ require_once '../QueryUser.php';
       $pClube = $_POST['clubeProjeto'];
       $pAndamento = $_POST['andamentoProjeto'];
       $pDimensao = $_POST['dimensaoProjeto'];
-       $Cadastrar = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_and, pro_dimensao, pro_distrito) VALUES ('$pNome', '$pAvenida', '$pClube', '4', '$pAndamento', '$pDimensao', '$Distrito')");
+      $DataCadastro = date('d/m/Y - H:i');
+       $Cadastrar = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_and, pro_dimensao, pro_distrito, pro_DataCadastro) VALUES ('$pNome', '$pAvenida', '$pClube', '4', '$pAndamento', '$pDimensao', '$Distrito', '$DataCadastro')");
         if ($Cadastrar) 
         {
          echo '<script type="text/JavaScript">alert("Cadastrado com Sucesso");
