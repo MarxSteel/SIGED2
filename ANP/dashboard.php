@@ -117,8 +117,6 @@ require_once '../QueryUser.php';
             $Qry = $Dados->fetch();
            echo $Qry['icbr_Clube'];
            echo '</td>';
-
-
             $StatusProjeto = $at["pro_status"];
              if ($StatusProjeto === '1') {
                echo '
@@ -165,6 +163,9 @@ require_once '../QueryUser.php';
              echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
              echo "'vProjeto.php?ID=" . $at['id'] . "');";
              echo '"><i class="fa fa-search"></i></a>&nbsp;';
+             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
+             echo "'dProjeto.php?ID=" . $at['id'] . "');";
+             echo '"><i class="fa fa-close"></i></a>&nbsp;';
              echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
              echo "'editaprojeto.php?ID=" . $at['id'] . "');";
              echo '"><i class="fa fa-refresh"></i></a>&nbsp;';
@@ -260,7 +261,7 @@ require_once '../QueryUser.php';
        <select class="form-control select3" name="clubeProjeto" style="width: 100%;">
         <option value="" selected="selected">SELECIONE</option>
         <?php while ($r = $dados->fetch(PDO::FETCH_ASSOC)): ?>
-        <option value="<?php echo $r['icbr_Clube'] ?>"><?php echo $r['icbr_Clube'] ?></option>
+        <option value="<?php echo $r['icbr_id'] ?>"><?php echo $r['icbr_Clube'] ?></option>
         <?php endwhile; ?>
        </select>
       </div>
