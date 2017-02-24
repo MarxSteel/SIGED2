@@ -142,13 +142,7 @@ $stmt->execute();
             <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-remove"></i>
             </a>
-            <a class="btn btn-default btn-sm" href="javascript:abrir('PrintUser.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-print"> Crachá</i>
-            </a>
-            <a class="btn bg-orange btn-sm" href="javascript:abrir('PrintUser.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-print"> Credencial (Padrão RI)</i>
-            </a>
-
+            <button type="button" class="btn btn-info btn-sm bg-navy" data-toggle="modal" data-target="#myModal"><i class="fa fa-print"></i> Credencial</button>  
            </td>
           </tr>
           <?php endwhile; ?>
@@ -247,14 +241,14 @@ include_once '../footer.php';
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
+    $("#Assinativo").DataTable();
+    $('#AssAtivo').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
-      "ordering": true,
+      "searching": true,
+      "ordering": false,
       "info": true,
-      "autoWidth": false
+      "autoWidth": true
     });
     $('#clubesAtivo').DataTable({
       "paging": true,
