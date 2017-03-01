@@ -6,9 +6,13 @@ $cClubes = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
 // AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
-$QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssCargo, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
+$QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
 $stmt = $PDO->prepare($QueryClubes);
 $stmt->execute();
+
+$QryAssI = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='I' ORDER BY icbr_AssNome ASC";
+$AssI = $PDO->prepare($QryAssI);  //AQUI CHAMO ASSOCIADOS DESLIGADOS
+$AssI->execute();
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,11 +27,8 @@ $stmt->execute();
  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
-     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+ <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
  <link rel="stylesheet" href="../plugins/select2/select2.min.css">
-
-
-
 </head>
 <body class="hold-transition skin-blue-light fixed sidebar-mini">
 <div class="wrapper">
@@ -115,10 +116,9 @@ $stmt->execute();
          <thead>
           <tr>
            <th>ID</th>
-           <th>Interact Clube de</th>
            <th>Nome</th>
            <th>Data de Nascimento</th>
-           <th>Cargo</th>
+           <th>Interact Clube de</th>
            <th></th>
           </tr>
          </thead>
@@ -131,10 +131,9 @@ $stmt->execute();
              $LinkUser = $user['icbr_uid'];
             ?>
            </td>
-           <td><?php echo $user['icbr_AssClube'] ?></td>
            <td><?php echo $user['icbr_AssNome'] ?></td>
            <td><?php echo $user['icbr_AssDtNascimento'] ?></td>
-           <td><?php echo $user['icbr_AssCargo'] ?></td>
+           <td><?php echo $user['icbr_AssClube'] ?></td>
            <td>
             <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-search"></i> Ver Perfil
@@ -158,34 +157,37 @@ $stmt->execute();
         <table id="clubesInativo" class="table table-bordered table-striped">
          <thead>
           <tr>
-           <td width="10%"><strong>ID</strong></td>
-           <td width="35%"><strong>Interact Club de:</strong></td>
-           <td width="35%"><strong>Reuni&otilde;es</strong></td>
-           <td width="20%"></td>
+           <th>ID</th>
+           <th>Nome</th>
+           <th>Data de Nascimento</th>
+           <th>Interact Clube de</th>
+           <th></th>
           </tr>
          </thead>
-        <tbody>
-         <?php
-          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='D'";
-           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
-           $ChamaAtivo->execute();
-            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
-            echo '<tr>';
-            echo '<td>' . $at["icbr_id"] . '</td>';
-            echo '<td>' . $at["icbr_Clube"] . '</td>';
-            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
-            echo '<td>';
-             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
-             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
-             echo '"><i class="fa fa-search"></i> VISUALIZAR</a>&nbsp;';
-             echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
-             echo "'ReativaClube.php?ID=" . $at['icbr_id'] . "');";
-             echo '"><i class="fa fa-thumbs-up"></i> REATIVAR</a>&nbsp;';
-            echo "</td>";
-            echo '</tr>';
-            endwhile;
-         ?>
-        </tbody>
+         <tbody>
+          <?php while ($Ain = $AssI->fetch(PDO::FETCH_ASSOC)): ?>
+          <tr>
+           <td>
+            <?php
+             echo $Ain['icbr_uid'];
+             $LinkUserIn = $Ain['icbr_uid'];
+            ?>
+           </td>
+           <td><?php echo $Ain['icbr_AssNome'] ?></td>
+           <td><?php echo $Ain['icbr_AssDtNascimento'] ?></td>
+           <td><?php echo $Ain['icbr_AssClube'] ?></td>
+           <td>
+            <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUserIn; ?>');">
+             <i class="fa fa-search"></i> Ver Perfil
+            </a>                          
+            <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUserIn; ?>');">
+             <i class="fa fa-remove"></i>
+            </a>
+            <button type="button" class="btn btn-info btn-sm bg-navy" data-toggle="modal" data-target="#Credencial"><i class="fa fa-print"></i> Credencial</button>  
+           </td>
+          </tr>
+          <?php endwhile; ?>
+         </tbody>
          <tfoot>
           <tr>
            <td><strong>ID</strong></td>
