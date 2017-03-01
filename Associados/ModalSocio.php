@@ -5,7 +5,7 @@
    <div class="modal-content">
     <div class="modal-header">
      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><code>&times;</code></span></button>
-      <h4 class="modal-title"></h4>
+      <h4 class="modal-title">Adicionar novo Cargo ao Histórico do associado</h4>
     </div>
     <div class="box-body">
       <form name="cadastrar_anuncio" id="name" method="post" action="" enctype="multipart/form-data">

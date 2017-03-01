@@ -350,6 +350,25 @@
 <!-- FINAL DO MODAL DE BUSCAR CLUBE -->
 
 
+<!-- INICIO DO MODAL DE IMPRESSÃO DE CREDENCIAL -->
+<div id="Credencial" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header bg-blue">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">Impressão de Credencial</h4>
+   </div>
+   <div class="modal-body">
+    <h3> EM BREVE! </h3>
+
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
+<!-- MODAL DE EXEMPLO -->
+<!-- FINAL DO MODAL DE IMPRESSÃO DE CREDENCIAL -->
+
 
 
 <!-- MODAL DE EXEMPLO -->
