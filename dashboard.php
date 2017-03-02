@@ -82,7 +82,7 @@ require_once 'QueryUser.php';
   <?php } else { } ?>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
-     <a href="Distrito/Associados.php" >
+     <a href="Associados/dashboard.php" >
       <span class="info-box-icon btn-danger"><i class="fa fa-user"></i></span>
      </a>
      <div class="info-box-content"><h4>Lista de Associados</h4></div>

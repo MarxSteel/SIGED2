@@ -117,8 +117,6 @@ require_once '../QueryUser.php';
             $Qry = $Dados->fetch();
            echo $Qry['icbr_Clube'];
            echo '</td>';
-
-
             $StatusProjeto = $at["pro_status"];
              if ($StatusProjeto === '1') {
                echo '
@@ -165,6 +163,9 @@ require_once '../QueryUser.php';
              echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
              echo "'vProjeto.php?ID=" . $at['id'] . "');";
              echo '"><i class="fa fa-search"></i></a>&nbsp;';
+             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
+             echo "'dProjeto.php?ID=" . $at['id'] . "');";
+             echo '"><i class="fa fa-close"></i></a>&nbsp;';
              echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
              echo "'editaprojeto.php?ID=" . $at['id'] . "');";
              echo '"><i class="fa fa-refresh"></i></a>&nbsp;';
@@ -260,7 +261,7 @@ require_once '../QueryUser.php';
        <select class="form-control select3" name="clubeProjeto" style="width: 100%;">
         <option value="" selected="selected">SELECIONE</option>
         <?php while ($r = $dados->fetch(PDO::FETCH_ASSOC)): ?>
-        <option value="<?php echo $r['icbr_Clube'] ?>"><?php echo $r['icbr_Clube'] ?></option>
+        <option value="<?php echo $r['icbr_id'] ?>"><?php echo $r['icbr_Clube'] ?></option>
         <?php endwhile; ?>
        </select>
       </div>
@@ -295,7 +296,8 @@ require_once '../QueryUser.php';
       $pClube = $_POST['clubeProjeto'];
       $pAndamento = $_POST['andamentoProjeto'];
       $pDimensao = $_POST['dimensaoProjeto'];
-       $Cadastrar = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_and, pro_dimensao, pro_distrito) VALUES ('$pNome', '$pAvenida', '$pClube', '4', '$pAndamento', '$pDimensao', '$Distrito')");
+      $DataCadastro = date('d/m/Y - H:i');
+       $Cadastrar = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_and, pro_dimensao, pro_distrito, pro_DataCadastro) VALUES ('$pNome', '$pAvenida', '$pClube', '4', '$pAndamento', '$pDimensao', '$Distrito', '$DataCadastro')");
         if ($Cadastrar) 
         {
          echo '<script type="text/JavaScript">alert("Cadastrado com Sucesso");
