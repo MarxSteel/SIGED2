@@ -21,6 +21,7 @@ $teste = "teste";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../plugins/select2/select2.min.css">
   <style type="text/css">
   .texto {
     word-wrap: break-word;
@@ -157,6 +158,7 @@ $teste = "teste";
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../dist/js/app.min.js"></script>
+<script src="../plugins/select2/select2.full.min.js"></script>
 <script>
 function formatar(mascara, documento){
   var i = documento.value.length;
@@ -168,6 +170,24 @@ function formatar(mascara, documento){
   }
   
 }
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select3").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select4").select2();
+  });
 </script>
 </body>
 </html>
