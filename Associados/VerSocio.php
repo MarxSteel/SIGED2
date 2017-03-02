@@ -93,8 +93,8 @@ $IDClube = $_GET['ID'];
      <div class="box-body">
       <div class="col-xs-8">
        <li class="list-group-item">
-        <b>#<?php echo $IDClubeSocio; ?></b> Interact Club de <?php echo $ClubeSocio; ?>
-        <a class="pull-right"></i></a>
+        <b>#<?php echo $IDClubeSocio; ?></b>
+        <span class="pull-right">Interact Club de <?php echo $ClubeSocio; ?></span>
        </li>
        <li class="list-group-item">
         <b>Data de Posse:</b> 
