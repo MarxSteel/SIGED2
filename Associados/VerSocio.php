@@ -157,7 +157,7 @@ include_once '../footer.php'; ?>
           "paging": true,
           "lengthChange": true,
           "searching": true,
-          "ordering": true,
+          "ordering": false,
           "info": true,
           "autoWidth": true
         });
@@ -181,6 +181,12 @@ include_once '../footer.php'; ?>
   $(function () {
     //Initialize Select2 Elements
     $(".select3").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select4").select2();
   });
 </script>
 </body>

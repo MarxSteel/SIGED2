@@ -114,9 +114,9 @@ $teste = "teste";
       <div class="col-xs-5"><br >
        <li class="list-group-item">
         <b>E-Mail para Contato:</b> 
-        <a class="pull-right"><?php echo $clubeMail; ?> </i>
+        <span class="pull-right"><?php echo $clubeMail; ?> </i>
          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#NovoEmail"><i class="fa fa-refresh"></i></button>
-        </a>
+        </span>
        </li>
       </div>
        <div class="col-xs-5">
@@ -124,17 +124,26 @@ $teste = "teste";
        </div>  
       <div class="col-xs-5">
        <li class="list-group-item">
-        <b>PRESIDENTE: </b><?php echo $clubePresidente; ?>
+        <b>PRESIDENTE: </b>
+        <span class="pull-right"><?php echo $clubePresidente; ?> </i>
+         <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#NovoPres"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       <div class="col-xs-5"><br />
        <li class="list-group-item">
-        <b>SECRETÁRIO: </b> <?php echo $clubeSecretario; ?>
+        <b>SECRETÁRIO: </b> 
+        <span class="pull-right"><?php echo $clubeSecretario; ?> </i>
+         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#NovoSec"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       <div class="col-xs-5"><br />
        <li class="list-group-item">
-        <b>TESOUREIRO: </b> <?php echo $clubeTesoureiro; ?>
+        <b>TESOUREIRO: </b> 
+        <span class="pull-right"><?php echo $clubeTesoureiro; ?> </i>
+         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#NovoTes"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       </div>

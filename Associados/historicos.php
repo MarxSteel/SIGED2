@@ -12,21 +12,19 @@
           $stmt = $PDO->prepare($QueryClubes);
           $stmt->execute();
         ?>
-        <table id="cargos" class="table table-bordered table-striped table-responsive">
+        <table id="cargos" class="table table-bordered table-striped">
          <thead>
           <tr>
-           <th>#</th>
-           <th>Gestão</th>
-           <th>Nível de cargo</th>
-           <th>Clube</th>
-           <th>Cargo</th>
-           <th>Distrito</th>
+           <th width="10%">Gestão</th>
+           <th width="15%">Nível de cargo</th>
+           <th width="30%">Clube</th>
+           <th width="30%">Cargo</th>
+           <th width="15%">Distrito</th>
           </tr>
          </thead>
          <tbody>
           <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
           <tr>
-           <td><?php echo $user['hist_id']; ?></td>
            <td><?php echo $user['hist_Gestao']; ?></td>
            <td>
             <?php 
@@ -35,10 +33,10 @@
                 echo "Clube";
               }
               elseif ($TipoCargo === '2') {
-                echo "Cargo Distrital";
+                echo "Distrito";
               } 
               elseif ($TipoCargo === '3') {
-                echo "Cargo IC Brasil";
+                echo "IC Brasil";
               }
               else {
                 //NADA AQUI
