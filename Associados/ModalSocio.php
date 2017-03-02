@@ -212,4 +212,42 @@ echo '
 
 
 
+<!-- INÍCIO DO MODAL DE DESATVIAR ASSOCIADO -->
+<div clss="main-box-body clearfix">
+ <div class="modal fade" id="Desativa" tabindex"-1" role="dialog" aria-abeledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><code>&times;</code></span></button>
+      <h4 class="modal-title">DESATIVAR ASSOCIADO</h4>
+    </div>
+    <div class="box-body">
+    <h2> ATENÇÃO, DESEJA REALMENTE DESLIGAR O ASSCIADO? </h2>
+     <form name="Desativa" id="name" method="post" action="" enctype="multipart/form-data">
+      <div class="col-xs-12"><br />
+       <input name="Desativa" type="submit" class="btn btn-danger btn-block btn-lg" id="Desativa" value="SIM, DESATIVAR ASSOCIADO"  />
+      </div>
+     </form>
+     <?php
+     if(@$_POST["Desativa"]){
+      $DesativaAssociado = $PDO->query("UPDATE icbr_associado SET icbr_AssStatus='I' WHERE icbr_uid='$IDClube' ");
+       if($DesativaAssociado)
+        {
+         echo '
+         <script type="text/JavaScript">alert("Associado Desligado com Sucesso");</script>
+         <script type="text/JavaScript">window.close();</script>';
+        }
+        else
+        {
+         echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+        }
+      }
+      ?>
+    </div><!-- /.box-body -->
+   </div>
+  </div>
+ </div>
+</div>
+<!-- FINAL DO MODAL DE DESATIVAR ASSOCIADO -->
+
 
