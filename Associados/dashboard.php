@@ -2,7 +2,8 @@
 require("../restritos.php"); 
 require_once '../init.php';
 $PrivClubes = "active";
-$cClubes = "active";
+$cAssociados = "active";
+$Submenu = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
 // AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
