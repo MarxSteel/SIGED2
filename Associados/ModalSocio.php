@@ -151,6 +151,65 @@ echo '
 </div>
 <!-- FINAL DO MODAL DE TROCAR FOTO -->
 
+<!-- INÍCIO DO MODAL DE REATIVAR ASSOCIADO -->
+<div clss="main-box-body clearfix">
+ <div class="modal fade" id="Reintegra" tabindex"-1" role="dialog" aria-abeledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><code>&times;</code></span></button>
+      <h4 class="modal-title">Readmitir associado</h4>
+    </div>
+    <div class="box-body">
+     <form name="Reativa" id="name" method="post" action="" enctype="multipart/form-data">
+      <div class="col-md-8">SELECIONE O CLUBE:
+      <?php
+       $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
+       // seleciona os registros
+       $stmt3 = $PDO->prepare($QueryClubes3);
+       $stmt3->execute();
+      ?>
+       <div class="form-group">
+        <select class="form-control select2" name="cl" style="width: 100%;">
+         <option value="" selected="selected">SELECIONE</option>
+          <?php while ($r = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+         <option value="<?php echo $r['icbr_Clube'] ?>"><?php echo $r['icbr_Clube'] ?></option>
+          <?php endwhile; ?>
+        </select>
+       </div>
+      </div>
+       <div class="col-xs-4"><br />
+        <input name="Reativa" type="submit" class="btn btn-success btn-block" id="Reativa" value="REATIVAR ASSOCIADO"  />
+       </div>
+      </form>
+      <?php
+      if(@$_POST["Reativa"]){
+        $NomeClube = $_POST['cl'];      //AQUI CHAMA O NOME DO CLUBE BASEADO NO FORM
+        $Dados = $PDO->prepare("SELECT * FROM icbr_clube WHERE icbr_Clube='$NomeClube'");
+        $Dados->execute();
+        $Qry = $Dados->fetch();
+        $IDNClube = $Qry['icbr_id'];    
+        $executa = $PDO->query("UPDATE icbr_associado SET icbr_AssStatus='A', icbr_AssClube='$NomeClube', icbr_AssClubeID='$IDNClube' WHERE icbr_uid='$IDClube' ");
+        if($executa)
+        {
+        echo '
+        <script type="text/JavaScript">alert("Associado Reativado com Sucesso");</script>
+        <script type="text/JavaScript">window.close();</script>';
+        }
+        else{
+      echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+        }
+      }
+      ?>
+
+
+    </div><!-- /.box-body -->
+   </div>
+  </div>
+ </div>
+</div>
+<!-- FINAL DO MODAL DE REATIVAR ASSOCIADO -->
+
 
 
 

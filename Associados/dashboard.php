@@ -188,10 +188,10 @@ $AssI->execute();
             <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUserIn; ?>');">
              <i class="fa fa-search"></i> Ver Perfil
             </a>                          
-            <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUserIn; ?>');">
-             <i class="fa fa-remove"></i>
+            <a class="btn btn-success btn-sm" href="javascript:abrir('Reintegra.php?ID=<?php echo $LinkUserIn; ?>');">
+             <i class="fa fa-refresh"> Reintegrar Associado</i>
             </a>
-            <button type="button" class="btn btn-info btn-sm bg-navy" data-toggle="modal" data-target="#Credencial"><i class="fa fa-print"></i> Credencial</button>  
+
            </td>
           </tr>
           <?php endwhile; ?>
