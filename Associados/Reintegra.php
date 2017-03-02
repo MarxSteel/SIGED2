@@ -124,72 +124,13 @@ $IDClube = $_GET['ID'];
         <img src="uploads/<?php echo $FotoSocio; ?>" width="140" alt="Foto">
        </li>
       </div>
-
      <div class="col-xs-12"> 
-      <h4>HISTÓRICO DE CARGOS</h4>
+      <h4>HISTÓRICOS</h4>
      </div>
-      <div class="col-xs-12">
-       <li class="list-group-item">
-        <?php
-           $QueryClubes = "SELECT * FROM icbr_historico WHERE hist_uid='$IDClube'";
-           $stmt = $PDO->prepare($QueryClubes);
-           $stmt->execute();
-        ?>
-        <table id="cargos" class="table table-bordered table-striped table-responsive">
-         <thead>
-          <tr>
-            <th>#</th>
-            <th>Gestão</th>
-            <th>Nível de cargo</th>
-            <th>Clube</th>
-            <th>Cargo</th>
-            <th>Distrito</th>
-          </tr>
-         </thead>
-         <tbody>
-          <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-          <tr>
-           <td><?php echo $user['hist_id']; ?></td>
-           <td><?php echo $user['hist_Gestao']; ?></td>
-           <td>
-            <?php 
-              $TipoCargo = $user['hist_Tipo'];
-              if ($TipoCargo === '1') {
-                echo "Clube";
-              }
-              elseif ($TipoCargo === '2') {
-                echo "Cargo Distrital";
-              } 
-              elseif ($TipoCargo === '3') {
-                echo "Cargo IC Brasil";
-              }
-              else {
-                //NADA AQUI
-              }
-            ?>
-           </td>
-           <td><?php echo $user['hist_Clube']; ?></td>
-           <td><?php echo $user['hist_Cargo']; ?></td>
-           <td><?php echo $user['hist_Distrito']; ?></td>             
-          </tr>
-         </tbody>
-           <?php endwhile; ?>
-
-        </table>
-           
-      </li>
-      </div>
-      </div>
-     </div>
-     
      <?php
-
+     include_once 'historicos.php';
      include_once 'ModalSocio.php';
      ?>
-
-
-
-
     </section>
   </div>
  </div>
