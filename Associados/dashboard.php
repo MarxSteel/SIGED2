@@ -100,6 +100,14 @@ $AssI->execute();
      <div class="info-box-content"><br /><h4>Importar Associados (XLS)</h4></div>
     </div>
    </div>
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a href="../Arquivo/Modelos/ModPlanilhaAssociado.xls" >
+      <span class="info-box-icon btn-danger"><i class="fa fa-download"></i></span>
+     </a>
+     <div class="info-box-content"><br /><h4>Baixar modelo de planilha</h4></div>
+    </div>
+   </div>
    <div class="col-xs-12">
     <div class="nav-tabs-custom">
      <ul class="nav nav-tabs pull-right">
