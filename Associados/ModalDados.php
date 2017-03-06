@@ -184,7 +184,7 @@
 
 
 <!-- INÍCIO DO MODAL DE CADASTRO DE ASSOCIADO -->
-<div id="Importar" class="modal fade" role="dialog">
+<div id="ImportaXLS" class="modal fade" role="dialog">
  <div class="modal-dialog modal-lg">
   <div class="modal-content">
    <div class="modal-header bg-orange">
@@ -192,6 +192,11 @@
      <h4 class="modal-title">Importar Lista de Associados</h4>
    </div>
    <div class="modal-body">
+    <div class="alert alert-danger alert-dismissible">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-ban"></i> Atenção!</h4>
+       Este formulário apenas IMPORTA os dados preenchidos no Excel, você é total responsável pela validade dos dados contidos nele. Caso as informações estejam fora de formatação e/ou sejam falsas, deverá ser solicitado via e-mail para a Interact Brasil a remoção, além de acarretar em perda de pontos no Ranking Interact Brasil. Vale ressaltar que, dependendo dos erros de preenchimento, será necessário purgar (apagar) todos os dados referentes ao seu distrito, para que possam ser preenchidos do início novamente, do Zero. Para lhe auxiliar, acesse o manual de importação disponível em Vídeo (Youtube e Download) além do documento em PDF.
+    </div>
    <form name="ImportaSocio" id="name" method="post" action="" enctype="multipart/form-data">
    <div class="col-md-4">SELECIONE O CLUBE:
     <?php
@@ -209,10 +214,10 @@
        </select>
       </div>
      </div>
-    <div class="col-xs-4">Senha de Administrador
+    <div class="col-xs-3">Senha de Administrador
      <input name="passRDI" type="password" required class="form-control" />
     </div>
-        <div>Selecione o Arquivo
+        <div class="col-xs-4">Selecione o Arquivo
      <input name="fileUpload" type="file" class="form" onfocus="this.value='';"/>      
     </div><br /><br /><br /><br /><br /><br /><br />
     <div>
@@ -234,9 +239,6 @@
         $Dados->execute();
         $Qry = $Dados->fetch();
         $clubeNome = $Qry['icbr_Clube'];
-
-
-
         date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
         $ext = strtolower(substr($_FILES['fileUpload']['name'],-4)); //Pegando extensão do arquivo
         $DataNome = date("Ymd-His");
@@ -277,7 +279,9 @@
             $TDDD2 = $data->val($i, 14);
             $TTEL2 = $data->val($i, 15);
             $EMAIL = $data->val($i, 16);
-            $Importar = $PDO->query("INSERT INTO icbr_associado (icbr_AssNome, icbr_AssDtNascimento, icbr_AssClube, icbr_AssDistrito, icbr_DtPosse, icbr_AssClubeID, icbr_AssEndereco, icbr_AssNum, icbr_AssBairro, icbr_AssCidade, icbr_AssUF, icbr_AssCEP, icbr_AssGenero, icbr_AssFoto, DDD_1, TELEFONE_1, DDD_2, TELEFONE_2, icbr_AssEmail) VALUES ('$NomeCompleto', '$DataNascimento', '$clubeNome', '$DistritoImporta', '$DataPosse', '$CodClube', '$ERua', '$ENum', '$EBai', '$ECid', '$EEst', '$ECEP', '$Gen', 'SemFoto.jpg', '$TDDD1', '$TTEL1', '$TDDD2', '$TTEL2', '$EMAIL')");
+            $CPFSOCIO = $data->val($i, 17);
+            $StatusSocio = $data->val($i, 18);
+            $Importar = $PDO->query("INSERT INTO icbr_associado (icbr_AssNome, icbr_AssDtNascimento, icbr_AssClube, icbr_AssDistrito, icbr_DtPosse, icbr_AssClubeID, icbr_AssEndereco, icbr_AssNum, icbr_AssBairro, icbr_AssCidade, icbr_AssUF, icbr_AssCEP, icbr_AssGenero, icbr_AssFoto, DDD_1, TELEFONE_1, DDD_2, TELEFONE_2, icbr_AssEmail, icbr_CPF, icbr_AssStatus) VALUES ('$NomeCompleto', '$DataNascimento', '$clubeNome', '$DistritoImporta', '$DataPosse', '$CodClube', '$ERua', '$ENum', '$EBai', '$ECid', '$EEst', '$ECEP', '$Gen', 'SemFoto.jpg', '$TDDD1', '$TTEL1', '$TDDD2', '$TTEL2', '$EMAIL', '$CPFSOCIO', '$StatusSocio')");
            if($Importar)
            {
             echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
@@ -303,51 +307,7 @@
  </div>
 </div>
 <!-- FINAL DO MODAL DE CADASTRO DE ASSOCIADO -->
-<!-- INICIO DO MODAL DE BUSCAR CLUBE -->
-<div id="ListaClube" class="modal fade" role="dialog">
- <div class="modal-dialog modal-lg">
-  <div class="modal-content">
-   <div class="modal-header bg-blue">
-    <button type="button" class="close" data-dismiss="modal">X</button>
-     <h4 class="modal-title">Listar Clubes e Códigos</h4>
-   </div>
-   <div class="modal-body">
-      <table id="ListaClubes" class="table table-bordered table-striped">
-         <thead>
-          <tr>
-           <td width="10%"><strong>ID</strong></td>
-           <td width="35%"><strong>Clube</strong></td>
-          </tr>
-         </thead>
-        <tbody>
-         <?php
-          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='A'";
-           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
-           $ChamaAtivo->execute();
-            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
-            echo '<tr>';
-            echo '<td>' . $at["icbr_id"] . '</td>';
-            echo '<td>Interact Club de ' . $at["icbr_Clube"] . '</td>';
-            echo '</tr>';
-            endwhile;
-         ?>
-        </tbody>
-         <tfoot>
-          <tr>
-           <td><strong>ID</strong></td>
-           <td><strong>Clube</strong></td>
-          </tr>
-         </tfoot>
-        </table>    
 
-
-
-   </div>
-   <div class="modal-footer"></div>
-  </div>
- </div>
-</div>
-<!-- FINAL DO MODAL DE BUSCAR CLUBE -->
 
 
 <!-- INICIO DO MODAL DE IMPRESSÃO DE CREDENCIAL -->
@@ -368,6 +328,11 @@
 </div>
 <!-- MODAL DE EXEMPLO -->
 <!-- FINAL DO MODAL DE IMPRESSÃO DE CREDENCIAL -->
+
+
+
+
+
 
 
 

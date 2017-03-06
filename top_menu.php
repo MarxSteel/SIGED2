@@ -1,4 +1,4 @@
-<body class="hold-transition skin-yellow-light fixed sidebar-mini">
+<body class="hold-transition skin-purple-light fixed sidebar-mini">
 <div class="wrapper">
  <header class="main-header">
   <a href="#" class="logo">

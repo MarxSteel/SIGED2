@@ -95,23 +95,26 @@ $AssI->execute();
    </div>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
-     <a href="Importar.php" target="_blank">
+     <a href="../Manuais/dashboard.php" target="_blank">
+      <span class="info-box-icon bg-navy"><i class="fa fa-question"></i></span>
+     </a>
+     <div class="info-box-content"><br /><h4>Manuais</h4></div>
+    </div>
+   </div>
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a data-toggle="modal" data-target="#ImportaXLS">
       <span class="info-box-icon btn-warning"><i class="fa fa-upload"></i></span>
      </a>
      <div class="info-box-content"><br /><h4>Importar Associados (XLS)</h4></div>
     </div>
    </div>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="../Arquivo/Modelos/ModPlanilhaAssociado.xls" >
-      <span class="info-box-icon btn-danger"><i class="fa fa-download"></i></span>
-     </a>
-     <div class="info-box-content"><br /><h4>Baixar modelo de planilha</h4></div>
-    </div>
-   </div>
    <div class="col-xs-12">
     <div class="nav-tabs-custom">
-     <ul class="nav nav-tabs pull-right">
+     <ul class="nav nav-tabs pull-right"> 
+     <li> 
+      <button type="button" class="btn btn-block btn-warning" onclick="location. href= 'ModeloSocioExcel.xls' " target="_blank">
+       <i class="fa fa-download"></i> Baixar Modelo de Planilha (.XLS)</button>
       <li class="active"><a href="#ativos" data-toggle="tab">Associados Ativos</a></li>
       <li><a href="#inativos" data-toggle="tab">Associados Inativos</a></li>
      </ul>
