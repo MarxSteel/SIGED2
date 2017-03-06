@@ -71,4 +71,5 @@ function validaCPF($cpf)
         return true;
   }
 }
+
 ?>
