@@ -3,6 +3,7 @@ require("../restritos.php");
 require_once '../init.php';
 $PrivClubes = "active";
 $cClubes = "active";
+$Submenu = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
 ?>

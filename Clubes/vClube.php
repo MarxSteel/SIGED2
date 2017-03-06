@@ -21,6 +21,7 @@ $teste = "teste";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../plugins/select2/select2.min.css">
   <style type="text/css">
   .texto {
     word-wrap: break-word;
@@ -114,9 +115,9 @@ $teste = "teste";
       <div class="col-xs-5"><br >
        <li class="list-group-item">
         <b>E-Mail para Contato:</b> 
-        <a class="pull-right"><?php echo $clubeMail; ?> </i>
+        <span class="pull-right"><?php echo $clubeMail; ?> </i>
          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#NovoEmail"><i class="fa fa-refresh"></i></button>
-        </a>
+        </span>
        </li>
       </div>
        <div class="col-xs-5">
@@ -124,17 +125,26 @@ $teste = "teste";
        </div>  
       <div class="col-xs-5">
        <li class="list-group-item">
-        <b>PRESIDENTE: </b><?php echo $clubePresidente; ?>
+        <b>PRESIDENTE: </b>
+        <span class="pull-right"><?php echo $clubePresidente; ?> </i>
+         <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#NovoPres"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       <div class="col-xs-5"><br />
        <li class="list-group-item">
-        <b>SECRETÁRIO: </b> <?php echo $clubeSecretario; ?>
+        <b>SECRETÁRIO: </b> 
+        <span class="pull-right"><?php echo $clubeSecretario; ?> </i>
+         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#NovoSec"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       <div class="col-xs-5"><br />
        <li class="list-group-item">
-        <b>TESOUREIRO: </b> <?php echo $clubeTesoureiro; ?>
+        <b>TESOUREIRO: </b> 
+        <span class="pull-right"><?php echo $clubeTesoureiro; ?> </i>
+         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#NovoTes"><i class="fa fa-refresh"></i></button>
+        </span>
        </li>
       </div>
       </div>
@@ -148,6 +158,7 @@ $teste = "teste";
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../dist/js/app.min.js"></script>
+<script src="../plugins/select2/select2.full.min.js"></script>
 <script>
 function formatar(mascara, documento){
   var i = documento.value.length;
@@ -159,6 +170,24 @@ function formatar(mascara, documento){
   }
   
 }
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select3").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select4").select2();
+  });
 </script>
 </body>
 </html>

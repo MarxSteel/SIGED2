@@ -526,9 +526,180 @@
   </div>
 </div>
 <!-- FIM DO MODAL DE TROCA DE E-MAIL -->
-
-
-
+<!-- MODAL DE ALTERAÇÃO DO PRESIDENTE -->
+<div id="NovoPres" class="modal fade" role="dialog">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header bg-green">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">ATUALIZAR PRESIDENTE</h4>
+   </div>
+   <div class="modal-body">
+    <div class="alert alert-warning alert-dismissible">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-check"></i> Atenção!</h4>
+       É possivel definir como presidente apenas associados com status de ATIVO, se o associado que deseja está desativado, favor reintegrar no cadastro de associados antes de efetuar esta alteração.    
+    </div>
+        <form name="NovoPresidente" id="name" method="post" action="" enctype="multipart/form-data">
+         <div class="col-md-8">SELECIONE O NOVO PRESIDENTE:
+         <?php
+          $ChamaSocioPres = "SELECT * FROM icbr_associado WHERE icbr_AssStatus='A' AND icbr_AssClubeID='$codClube'";
+           // seleciona os registros
+           $socioPres = $PDO->prepare($ChamaSocioPres);
+           $socioPres->execute();
+         ?>
+          <div class="form-group">
+           <select class="form-control select2" name="presidente" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+            <?php while ($SPres = $socioPres->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $SPres['icbr_AssNome'] ?>"><?php echo $SPres['icbr_AssNome'] ?></option>
+            <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-xs-4"><br />
+          <input name="NovoPresidente" type="submit" class="btn btn-success" id="NovoPresidente" value="ATUALIZAR PRESIDENTE"  />
+         </div>
+        </form>
+        <?php
+        if(@$_POST["NovoPresidente"])
+        {
+         $NvPresidente = $_POST["presidente"];
+          $AlteraPresidente = $PDO->query("UPDATE icbr_clube SET icbr_Presidente='$NvPresidente' WHERE icbr_id='$codClube' ");
+         if($AlteraPresidente)
+         {
+          echo '
+          <script type="text/JavaScript">alert("Presidente Atualizado com Sucesso");
+          location.href="vClube.php?ID=' . $codClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+        }
+        ?>  
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
+<!-- MODAL DE ALTERAÇÃO DO PRESIDENTE -->
+<!-- MODAL DE ALTERAÇÃO DO SECRETÁRIO -->
+<div id="NovoSec" class="modal fade" role="dialog">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header bg-red">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">ATUALIZAR SECRETÁRIO</h4>
+   </div>
+   <div class="modal-body">
+    <div class="alert alert-warning alert-dismissible">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-check"></i> Atenção!</h4>
+       É possivel definir como secretário apenas associados com status de ATIVO, se o associado que deseja está desativado, favor reintegrar no cadastro de associados antes de efetuar esta alteração.    
+    </div>
+        <form name="NovoSecretario" id="name" method="post" action="" enctype="multipart/form-data">
+         <div class="col-md-8">SELECIONE O NOVO SECRETÁRIO:
+         <?php
+          $ChamaSocioSec = "SELECT * FROM icbr_associado WHERE icbr_AssStatus='A' AND icbr_AssClubeID='$codClube'";
+           // seleciona os registros
+           $socioSec = $PDO->prepare($ChamaSocioSec);
+           $socioSec->execute();
+         ?>
+          <div class="form-group">
+           <select class="form-control select3" name="secretario" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+            <?php while ($SSec = $socioSec->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $SSec['icbr_AssNome'] ?>"><?php echo $SSec['icbr_AssNome'] ?></option>
+            <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-xs-4"><br />
+          <input name="NovoSecretario" type="submit" class="btn btn-danger" id="NovoSecretario" value="ATUALIZAR SECRETARIO"  />
+         </div>
+        </form>
+        <?php
+        if(@$_POST["NovoSecretario"])
+        {
+         $NvSecretario = $_POST["secretario"];
+          $AlteraSecretario = $PDO->query("UPDATE icbr_clube SET icbr_Secretario='$NvSecretario' WHERE icbr_id='$codClube' ");
+         if($AlteraSecretario)
+         {
+          echo '
+          <script type="text/JavaScript">alert("Secretario Atualizado com Sucesso");
+          location.href="vClube.php?ID=' . $codClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+        }
+        ?>  
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
+<!-- MODAL DE ALTERAÇÃO DO SECRETÁRIO -->
+<!-- MODAL DE ALTERAÇÃO DO TESOUREIRO -->
+<div id="NovoTes" class="modal fade" role="dialog">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header bg-red">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">ATUALIZAR TESOUREIRO</h4>
+   </div>
+   <div class="modal-body">
+    <div class="alert alert-primary alert-dismissible">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-check"></i> Atenção!</h4>
+       É possivel definir como tesoureiro apenas associados com status de ATIVO, se o associado que deseja está desativado, favor reintegrar no cadastro de associados antes de efetuar esta alteração.    
+    </div>
+        <form name="NovoTesoureiro" id="name" method="post" action="" enctype="multipart/form-data">
+         <div class="col-md-8">SELECIONE O NOVO TESOUREIRO:
+         <?php
+          $ChamaSocioTes = "SELECT * FROM icbr_associado WHERE icbr_AssStatus='A' AND icbr_AssClubeID='$codClube'";
+           // seleciona os registros
+           $socioTes = $PDO->prepare($ChamaSocioTes);
+           $socioTes->execute();
+         ?>
+          <div class="form-group">
+           <select class="form-control select4" name="tesoureiro" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+            <?php while ($STes = $socioTes->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $STes['icbr_AssNome'] ?>"><?php echo $STes['icbr_AssNome'] ?></option>
+            <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-xs-4"><br />
+          <input name="NovoTesoureiro" type="submit" class="btn btn-warning" id="NovoTesoureiro" value="ATUALIZAR TESOUREIRO"  />
+         </div>
+        </form>
+        <?php
+        if(@$_POST["NovoTesoureiro"])
+        {
+         $NvTesoureiro = $_POST["tesoureiro"];
+          $AlteraTesoureiro = $PDO->query("UPDATE icbr_clube SET icbr_Tesoureiro='$NvTesoureiro' WHERE icbr_id='$codClube' ");
+         if($AlteraTesoureiro)
+         {
+          echo '
+          <script type="text/JavaScript">alert("Tesoureiro Atualizado com Sucesso");
+          location.href="vClube.php?ID=' . $codClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+        }
+        ?>  
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
+<!-- MODAL DE ALTERAÇÃO DO TESOUREIRO -->
 
 
 

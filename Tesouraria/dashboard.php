@@ -2,18 +2,10 @@
 require("../restritos.php"); 
 require_once '../init.php';
 $PrivClubes = "active";
-$cAssociados = "active";
+$cTesouraria = "active";
 $Submenu = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
-// AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
-$QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
-$stmt = $PDO->prepare($QueryClubes);
-$stmt->execute();
-
-$QryAssI = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='I' ORDER BY icbr_AssNome ASC";
-$AssI = $PDO->prepare($QryAssI);  //AQUI CHAMO ASSOCIADOS DESLIGADOS
-$AssI->execute();
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,8 +20,9 @@ $AssI->execute();
  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
- <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
- <link rel="stylesheet" href="../plugins/select2/select2.min.css">
+     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+
+
 </head>
 <body class="hold-transition skin-blue-light fixed sidebar-mini">
 <div class="wrapper">
@@ -76,85 +69,74 @@ $AssI->execute();
   </aside>
 <div class="content-wrapper">
  <section class="content-header">
-  <h1>Cadastro de Associados
+  <h1>Cadastro de Clubes
    <small><?php echo "<strong> Distrito " . $Distrito . "</strong> " . $Titulo; ?></small>
   </h1>
  </section>
  <section class="content">
   <div class="row">
    <?php
-    if($PrivAssociado === '1'){
+    if($PrivClubes === '1'){
    ?> 
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
-     <a data-toggle="modal" data-target="#NovoSocio">
+     <a data-toggle="modal" data-target="#NovoClub">
       <span class="info-box-icon btn-primary"><i class="fa fa-plus"></i></span>
      </a>
-     <div class="info-box-content"><br /><h4>Cadastrar Associado</h4></div>
-    </div>
-   </div>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="Importar.php" target="_blank">
-      <span class="info-box-icon btn-warning"><i class="fa fa-upload"></i></span>
-     </a>
-     <div class="info-box-content"><br /><h4>Importar Associados (XLS)</h4></div>
-    </div>
-   </div>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="../Arquivo/Modelos/ModPlanilhaAssociado.xls" >
-      <span class="info-box-icon btn-danger"><i class="fa fa-download"></i></span>
-     </a>
-     <div class="info-box-content"><br /><h4>Baixar modelo de planilha</h4></div>
+     <div class="info-box-content"><br /><h4>Adicionar Club</h4></div>
     </div>
    </div>
    <div class="col-xs-12">
     <div class="nav-tabs-custom">
      <ul class="nav nav-tabs pull-right">
-      <li class="active"><a href="#ativos" data-toggle="tab">Associados Ativos</a></li>
-      <li><a href="#inativos" data-toggle="tab">Associados Inativos</a></li>
+      <li class="active"><a href="#ativos" data-toggle="tab">Clubes Ativos</a></li>
+      <li><a href="#inativos" data-toggle="tab">Clubes Inativos</a></li>
      </ul>
      <div class="tab-content">
       <div class="tab-pane active" id="ativos">
        <div class="box-header">
-        <h3 class="box-title">Lista de Associados <strong>ATIVOS</strong> do <strong>Distrito <?php echo $Distrito; ?></strong></h3>
+        <h3 class="box-title">Lista de Clubes <strong>ATIVOS</strong> do <strong>Distrito <?php echo $Distrito; ?></strong></h3>
        </div>
        <div class="box-body">
-        <table id="AssAtivo" class="table table-bordered table-striped table-responsive">
+        <table id="clubesAtivo" class="table table-bordered table-striped">
          <thead>
           <tr>
-           <th>ID</th>
-           <th>Nome</th>
-           <th>Data de Nascimento</th>
-           <th>Interact Clube de</th>
-           <th></th>
+           <td width="10%"><strong>ID</strong></td>
+           <td width="35%"><strong>Interact Club de:</strong></td>
+           <td width="35%"><strong>Reuni&otilde;es</strong></td>
+           <td width="20%"></td>
           </tr>
          </thead>
-         <tbody>
-          <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+        <tbody>
+         <?php
+          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='A'";
+           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
+           $ChamaAtivo->execute();
+            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
+            echo '<tr>';
+            echo '<td>' . $at["icbr_id"] . '</td>';
+            echo '<td>' . $at["icbr_Clube"] . '</td>';
+            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
+            echo '<td>';
+             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-search"></i> VISUALIZAR</a>&nbsp;';
+             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
+             echo "'InativaClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-thumbs-down"></i> INATIVAR</a>&nbsp;';
+            echo "</td>";
+            echo '</tr>';
+            endwhile;
+         ?>
+        </tbody>
+         <tfoot>
           <tr>
-           <td>
-            <?php
-             echo $user['icbr_uid'];
-             $LinkUser = $user['icbr_uid'];
-            ?>
-           </td>
-           <td><?php echo $user['icbr_AssNome'] ?></td>
-           <td><?php echo $user['icbr_AssDtNascimento'] ?></td>
-           <td><?php echo $user['icbr_AssClube'] ?></td>
-           <td>
-            <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-search"></i> Ver Perfil
-            </a>                          
-            <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-remove"></i>
-            </a>
-            <button type="button" class="btn btn-info btn-sm bg-navy" data-toggle="modal" data-target="#Credencial"><i class="fa fa-print"></i> Credencial</button>  
-           </td>
+           <td><strong>ID</strong></td>
+           <td><strong>Interact Club de:</strong></td>
+           <td><strong>Reuni&otilde;es</strong></td>
+           <td></td>
           </tr>
-          <?php endwhile; ?>
-         </tbody>
+         </tfoot>
         </table>
        </div>
       </div>
@@ -166,37 +148,34 @@ $AssI->execute();
         <table id="clubesInativo" class="table table-bordered table-striped">
          <thead>
           <tr>
-           <th>ID</th>
-           <th>Nome</th>
-           <th>Data de Nascimento</th>
-           <th>Interact Clube de</th>
-           <th></th>
+           <td width="10%"><strong>ID</strong></td>
+           <td width="35%"><strong>Interact Club de:</strong></td>
+           <td width="35%"><strong>Reuni&otilde;es</strong></td>
+           <td width="20%"></td>
           </tr>
          </thead>
-         <tbody>
-          <?php while ($Ain = $AssI->fetch(PDO::FETCH_ASSOC)): ?>
-          <tr>
-           <td>
-            <?php
-             echo $Ain['icbr_uid'];
-             $LinkUserIn = $Ain['icbr_uid'];
-            ?>
-           </td>
-           <td><?php echo $Ain['icbr_AssNome'] ?></td>
-           <td><?php echo $Ain['icbr_AssDtNascimento'] ?></td>
-           <td><?php echo $Ain['icbr_AssClube'] ?></td>
-           <td>
-            <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUserIn; ?>');">
-             <i class="fa fa-search"></i> Ver Perfil
-            </a>                          
-            <a class="btn btn-success btn-sm" href="javascript:abrir('Reintegra.php?ID=<?php echo $LinkUserIn; ?>');">
-             <i class="fa fa-refresh"> Reintegrar Associado</i>
-            </a>
-
-           </td>
-          </tr>
-          <?php endwhile; ?>
-         </tbody>
+        <tbody>
+         <?php
+          $ClubeAtivo = "SELECT * FROM icbr_clube WHERE icbr_Distrito='$Distrito' AND icbr_Status='D'";
+           $ChamaAtivo = $PDO->prepare($ClubeAtivo);
+           $ChamaAtivo->execute();
+            while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
+            echo '<tr>';
+            echo '<td>' . $at["icbr_id"] . '</td>';
+            echo '<td>' . $at["icbr_Clube"] . '</td>';
+            echo '<td>' . $at["icbr_Semana"] . ' - ' . $at["icbr_Horario"] . ' (' . $at["icbr_Periodo"] . ')</td>';
+            echo '<td>';
+             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+             echo "'vClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-search"></i> VISUALIZAR</a>&nbsp;';
+             echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
+             echo "'ReativaClube.php?ID=" . $at['icbr_id'] . "');";
+             echo '"><i class="fa fa-thumbs-up"></i> REATIVAR</a>&nbsp;';
+            echo "</td>";
+            echo '</tr>';
+            endwhile;
+         ?>
+        </tbody>
          <tfoot>
           <tr>
            <td><strong>ID</strong></td>
@@ -247,19 +226,17 @@ include_once '../footer.php';
 <script src="../dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
-<script src="../plugins/select2/select2.full.min.js"></script>
-
 <!-- page script -->
 <script>
   $(function () {
-    $("#Assinativo").DataTable();
-    $('#AssAtivo').DataTable({
+    $("#example1").DataTable();
+    $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": true,
-      "ordering": false,
+      "searching": false,
+      "ordering": true,
       "info": true,
-      "autoWidth": true
+      "autoWidth": false
     });
     $('#clubesAtivo').DataTable({
       "paging": true,
@@ -304,43 +281,5 @@ function formatar(mascara, documento){
   
 }
 </script>
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $(".select2").select2();
-  });
-</script>
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $(".select3").select2();
-  });
-</script>
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $(".select4").select2();
-  });
-</script>
-    <script type="text/javascript">
-    $(function(){
-      $('#cod_estados').change(function(){
-        if( $(this).val() ) {
-          $('#cod_cidades').hide();
-          $('.carregando').show();
-          $.getJSON('cidades.ajax.php?search=',{cod_estados: $(this).val(), ajax: 'true'}, function(j){
-            var options = '<option value=""></option>'; 
-            for (var i = 0; i < j.length; i++) {
-              options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
-            } 
-            $('#cod_cidades').html(options).show();
-            $('.carregando').hide();
-          });
-        } else {
-          $('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
-        }
-      });
-    });
-    </script>
 </body>
 </html>
