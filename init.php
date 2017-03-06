@@ -1,5 +1,5 @@
 <?php
-
+$server = 'http://localhost:8888/Sistema/SIGED2';
 // constantes com as credenciais de acesso ao banco MySQL
 $host = "localhost:8889";
 $user = "root";
