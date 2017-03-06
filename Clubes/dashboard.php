@@ -20,9 +20,7 @@ require_once '../QueryUser.php';
  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
-     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
-
-
+ <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
 </head>
 <body class="hold-transition skin-blue-light fixed sidebar-mini">
 <div class="wrapper">
@@ -84,6 +82,14 @@ require_once '../QueryUser.php';
       <span class="info-box-icon btn-primary"><i class="fa fa-plus"></i></span>
      </a>
      <div class="info-box-content"><br /><h4>Adicionar Club</h4></div>
+    </div>
+   </div>
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a href="../Manuais/dashboard.php" target="_blank">
+      <span class="info-box-icon bg-navy"><i class="fa fa-question"></i></span>
+     </a>
+     <div class="info-box-content"><br /><h4>Manuais</h4></div>
     </div>
    </div>
    <div class="col-xs-12">
