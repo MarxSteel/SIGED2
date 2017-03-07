@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+  <!--<link rel="stylesheet" href="plugins/iCheck/square/blue.css">-->
 </head>
 <body class="hold-transition login-page">
  <div class="login-box">
   <div class="login-box-body">
    <p class="login-box-msg">
-    <img src="dist/img/logo/ICBrasil_Direita.png" width="260">
+    <img src="dist/img/logo/LogoICSIGED.png" height="130">
     <?php
      if (isset($_GET["erro"])) {
       echo '<div class="alert alert-danger alert-dismissible">';
@@ -41,6 +41,8 @@
      </div>
     </div>
    </form>
+    <a href="#" target="_blank">Esqueci minha senha</a><br>
+
   </div>
  </div>
  <p align="center">
