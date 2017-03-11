@@ -31,49 +31,12 @@ $AssI->execute();
  <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
  <link rel="stylesheet" href="../plugins/select2/select2.min.css">
 </head>
-<body class="hold-transition skin-blue-light fixed sidebar-mini">
-<div class="wrapper">
- <header class="main-header">
-  <a href="../#" class="logo">
-   <span class="logo-mini"><img src="../dist/img/logo/ICLogoMin.png" width="50"/></span>
-   <span class="logo-lg"><img src="../dist/img/logo/ICLogoMini.png" width="180" /></span>
-  </a>
-  <nav class="navbar navbar-static-top">
-   <a href="../#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-    <span class="sr-only">Minizar Navegação</span>
-   </a>
-   <div class="navbar-custom-menu">
-    <ul class="nav navbar-nav">
-     <li class="dropdown user user-menu">
-      <a href="../#" class="dropdown-toggle" data-toggle="dropdown">
-       <span class="hidden-xs"><?php echo $NomeUserLogado; ?></span>
-      </a>
-      <ul class="dropdown-menu">
-       <li class="user-header">
-        <p><?php echo $NomeUserLogado; ?></p>
-       </li>
-       <li class="user-footer">
-        <div class="pull-left">
-         <a href="../user/perfil.php" class="btn btn-info">Dados de Perfil</a>
-        </div>
-        <div class="pull-right">
-         <a href="../logout.php" class="btn btn-danger">Sair</a>
-        </div>
-       </li>
-      </ul>
-     </li>
-     <li>
-       <a href="../logout.php" class="btn btn-danger btn-flat">Sair</a>
-     </li>
-    </ul>
-    </div>
-    </nav>
-  </header>
-  <aside class="main-sidebar">
-   <section class="sidebar">
-    <?php include_once '../menuLateral.php'; ?>
-    </section>
-  </aside>
+ <?php include_once '../top_menu.php'; ?> <!-- CHAMANDO O TOP MENU (COR, DADOS DE USUARIO, CABEÇALHO -->
+ <aside class="main-sidebar">
+  <section class="sidebar">
+   <?php include_once '../menuLateral.php'; ?>
+  </section>
+ </aside>
 <div class="content-wrapper">
  <section class="content-header">
   <h1>Cadastro de Associados
@@ -304,7 +267,6 @@ function formatar(mascara, documento){
   if (texto.substring(0,1) != saida){
             documento.value += texto.substring(0,1);
   }
-  
 }
 </script>
 <script>
