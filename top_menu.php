@@ -1,4 +1,4 @@
-<body class="hold-transition skin-purple-light fixed sidebar-mini">
+<body class="hold-transition skin-<?php echo $CorPainel; ?> fixed sidebar-mini">
 <div class="wrapper">
  <header class="main-header">
   <a href="#" class="logo">
@@ -29,14 +29,11 @@
        <!-- INATIVO POR ENQUANTO -->  
        <li class="user-body">
         <div class="row">
-         <div class="col-xs-4 text-center">
-          <a href="#">Followers</a>
+         <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#Sobre">Sobre o SIGED</button>
          </div>
-         <div class="col-xs-4 text-center">
-          <a href="#">Sales</a>
-         </div>
-         <div class="col-xs-4 text-center">
-          <a href="#">Friends</a>
+         <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#TermosUso">Termo de Uso</button>
          </div>
         </div>
        </li>
