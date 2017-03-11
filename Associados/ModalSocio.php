@@ -21,17 +21,6 @@
          <div class="col-xs-4">Distrito
           <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
          </div>
-         <div class="col-xs-4">Gestão
-          <input name="gestao" type="text" class="form-control" id="gestao" minlength="7" maxlength="7" required="required" placeholder="2011-12" />
-         </div>
-         <div class="col-xs-4">Tipo de Cargo
-          <select class="form-control" name="tipo" id="tipo" required="required">   
-           <option value="" checked="checked"> >><<</option>
-           <option value="1">Clube</option>
-           <option value="2">Distrito</option>
-           <option value="3">Interact Brasil</option>
-          </select>
-         </div>
          <div class="col-md-8">SELECIONE O CLUBE:
          <?php
           $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
@@ -48,22 +37,36 @@
            </select>
           </div>
          </div>
-       <div class="col-md-4">Cargo:
-        <?php
-         $ChamaCargo = "SELECT * FROM ListaCargos";
-          // seleciona os registros
-          $stmt2 = $PDO->prepare($ChamaCargo);
-          $stmt2->execute();
-        ?>
-        <div class="form-group">
-         <select class="form-control select3" name="cargo" style="width: 100%;">
-          <option value="" selected="selected">SELECIONE</option>
-          <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-          <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
-          <?php endwhile; ?>
-         </select>
-        </div>
-       </div>
+         <div class="col-md-4">GESTÃO:
+          <?php
+           $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";// seleciona os registros
+           $QryGestao = $PDO->prepare($ChamaGestao);
+           $QryGestao->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select2" name="gestao" style="width: 100%;" required>
+            <option value="" selected="selected">SELECIONE</option>
+              <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+              <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-8">Cargo:
+          <?php
+           $ChamaCargo = "SELECT * FROM ListaCargos WHERE TipoCargo=1";// seleciona os registros
+            $stmt2 = $PDO->prepare($ChamaCargo);
+            $stmt2->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select3" name="cargo" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+             <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
+             <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
          <div class="col-xs-12"><br />
           <input name="NovoCargoClube" type="submit" class="btn btn-success btn-block" id="NovoCargoClube" value="Adicionar Cargo"  />
          </div>
@@ -72,7 +75,7 @@
         if(@$_POST["NovoCargoClube"])
         {
          $Gestao = $_POST["gestao"];
-         $TipoCargo = $_POST["tipo"];
+         $TipoCargo = '1';
          $Clube = $_POST["cl"];
          $Cargo = $_POST["cargo"];
          $executa = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Clube, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Cargo', '$Clube', '$DistritoSocio', '$TipoCargo')");
@@ -88,12 +91,6 @@
          }
         }
         ?>      
-
-
-
-
-
-
        </div>
       </div>
      </div> 
@@ -106,18 +103,83 @@
         </div>
        </div>
        <div class="box-body">
-
+        <form name="NovoCargoDistrito" id="name" method="post" action="" enctype="multipart/form-data">
+         <div class="col-xs-4">Distrito
+          <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
+         </div>
+         <div class="col-md-8">SELECIONE O CLUBE:
+         <?php
+          $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
+           // seleciona os registros
+           $stmt3 = $PDO->prepare($QueryClubes3);
+           $stmt3->execute();
+         ?>
+          <div class="form-group">
+           <select class="form-control select2" name="Dcl" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+            <?php while ($r = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $r['icbr_Clube'] ?>"><?php echo $r['icbr_Clube'] ?></option>
+            <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-4">GESTÃO:
+          <?php
+           $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";// seleciona os registros
+           $QryGestao = $PDO->prepare($ChamaGestao);
+           $QryGestao->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select2" name="Dgestao" style="width: 100%;" required>
+            <option value="" selected="selected">SELECIONE</option>
+              <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+              <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-8">Cargo:
+          <?php
+           $ChamaCargo = "SELECT * FROM ListaCargos WHERE TipoCargo=2";// seleciona os registros
+            $stmt2 = $PDO->prepare($ChamaCargo);
+            $stmt2->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select3" name="Dcargo" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+             <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
+             <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-xs-12"><br />
+          <input name="NovoCargoDistrito" type="submit" class="btn btn-warning btn-block" id="NovoCargoClube" value="Adicionar Cargo"  />
+         </div>         
+        </form>
+        <?php
+        if(@$_POST["NovoCargoDistrito"])
+        {
+         $Gestao = $_POST["Dgestao"];
+         $TipoCargo = '2';
+         $Clube = $_POST["Dcl"];
+         $Cargo = $_POST["Dcargo"];
+         $executa = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Clube, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Cargo', '$Clube', '$DistritoSocio', '$TipoCargo')");
+         if($executa)
+         {
+          echo '
+          <script type="text/JavaScript">alert("Cargo Adicionado com Sucesso");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+        }
+        ?>    
        </div>
       </div>
      </div> 
-
-
-
-
-
-
-
-
     </div><!-- /.box-body -->
    </div>
   </div>
