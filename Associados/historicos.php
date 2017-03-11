@@ -8,7 +8,7 @@
        </div>
        <div class="box-body">
         <?php
-         $QueryClubes = "SELECT * FROM icbr_historico WHERE hist_uid='$IDClube'";
+         $QueryClubes = "SELECT * FROM icbr_historico WHERE hist_uid='$IDClube' AND hist_Tipo!='4'";
           $stmt = $PDO->prepare($QueryClubes);
           $stmt->execute();
         ?>
@@ -62,7 +62,32 @@
         </div>
        </div>
        <div class="box-body">
-              EM BREVE!
+        <?php
+         $Querypremio = "SELECT * FROM icbr_historico WHERE hist_uid='$IDClube' AND hist_Tipo='4'";
+          $qryPremio = $PDO->prepare($Querypremio);
+          $qryPremio->execute();
+        ?>
+        <table id="premios" class="table table-bordered table-striped">
+         <thead>
+          <tr>
+           <th width="10%">Gestão</th>
+           <th width="40%">Clube:</th>
+           <th width="50%">Premio</th>
+          </tr>
+         </thead>
+         <tbody>
+          <?php while ($pre = $qryPremio->fetch(PDO::FETCH_ASSOC)): ?>
+          <tr>
+           <td><?php echo $pre['hist_Gestao']; ?></td>
+           <td><?php echo '[' . $pre['hist_Distrito'] . '] - Interact Club de ' . $pre['hist_Clube']; ?></td>
+           <td><?php echo $pre['hist_Cargo']; ?></td>
+          </tr>
+         </tbody>
+           <?php endwhile; ?>
+        </table>
+
+
+
        </div>
       </div>
      </div> 
