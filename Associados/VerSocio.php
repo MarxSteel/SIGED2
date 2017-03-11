@@ -57,25 +57,9 @@ $IDClube = $_GET['ID'];
 
 
 </head>
-<body class="hold-transition skin-blue layout-top-nav">
- <div class="wrapper">
-  <header class="main-header">
-   <nav class="navbar navbar-static-top">
-    <div class="container">
-     <div class="navbar-header">
-   <span class="logo-lg"><img src="../dist/img/logo/ICLogo.png" width="200"></span>
-     </div>
-     <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
-       <li class="dropdown user user-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <span class="hidden-xs">Olá, <?php echo $LoginNome; ?></span></a>
-       </li>
-      </ul>
-     </div>
-    </div>
-   </nav>
-  </header>
+<?php
+include_once '../header_top.php';
+?>
   <div class="content-wrapper">
    <div class="container">
     <section class="content">
@@ -84,10 +68,12 @@ $IDClube = $_GET['ID'];
       <h2 class="box-title">
       #<?php echo $IDClube; ?> - <strong> <?php echo $NomeCompleto; ?></strong></h2>
       <small class="pull-right">
-       <a data-toggle="modal" data-target="#NovoCargo" class="btn btn-default">
+       <a data-toggle="modal" data-target="#NovoCargo" class="btn btn-primary">
        <i class="fa fa-briefcase"> Add Cargo</i></a>
        <a data-toggle="modal" data-target="#NovaFoto" class="btn bg-orange">
        <i class="fa fa-camera"> Trocar Foto</i></a>
+       <a data-toggle="modal" data-target="#NovoPremio" class="btn btn-danger">
+       <i class="fa fa-trophy"> Adicionar Premiação</i></a>
       </small>
      </div>
      <div class="box-body">
@@ -161,7 +147,7 @@ include_once '../footer.php'; ?>
           "info": true,
           "autoWidth": true
         });
-        $('#AAtivo').DataTable({
+        $('#premios').DataTable({
           "paging": true,
           "lengthChange": true,
           "searching": true,
