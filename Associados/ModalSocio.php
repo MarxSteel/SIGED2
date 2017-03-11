@@ -290,3 +290,66 @@ echo '
 <!-- FINAL DO MODAL DE DESATIVAR ASSOCIADO -->
 
 
+
+<!-- INÍCIO DO MODAL DE ADICIONAR PREMIAÇÃO DO ASSOCIADO -->
+<div clss="main-box-body clearfix">
+ <div class="modal fade" id="NovoPremio" tabindex"-1" role="dialog" aria-abeledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><code>&times;</code></span></button>
+      <h4 class="modal-title">ADICIONAR PREMIAÇÃO DE ASSOCIADO</h4>
+    </div>
+    <div class="box-body">
+    <form name="NovoPremio" id="name" method="post" action="" enctype="multipart/form-data">
+     <div class="col-xs-3">Distrito
+      <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
+     </div>
+     <div class="col-xs-6">Prêmio
+      <input class="form-control" type="text" name="premio" required">
+     </div>
+     <div class="col-md-3">GESTÃO:
+      <?php
+       $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";
+        // seleciona os registros
+        $QryGestao = $PDO->prepare($ChamaGestao);
+        $QryGestao->execute();
+       ?>
+     <div class="form-group">
+      <select class="form-control select2" name="gestao" style="width: 100%;" required>
+       <option value="" selected="selected">SELECIONE</option>
+        <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+       <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+       <?php endwhile; ?>
+      </select>
+     </div>
+    </div>
+    <div class="col-xs-12"><br />
+     <input name="NovoPremio" type="submit" class="btn btn-success btn-block" id="NovoCargoClube" value="ADICIONAR PREMIAÇÃO"  />
+    </div>
+    </form>
+    <?php
+     if(@$_POST["NovoPremio"])
+     {
+      $Gestao = $_POST["gestao"];
+      $Premio = $_POST["premio"];
+       $AdicionaPremio = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Premio', '$Distrito', '4')");
+       if ($AdicionaPremio) 
+         {
+          echo '
+          <script type="text/JavaScript">alert("Cargo Adicionado com Sucesso");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+
+        }
+        ?>    
+    </div><!-- /.box-body -->
+   </div>
+  </div>
+ </div>
+</div>
+<!-- FINAL DO MODAL DE ADICIONAR PREMIAÇÃO DO ASSOCIADO -->
