@@ -196,54 +196,57 @@
       <h4 class="modal-title">Trocar Foto </h4>
     </div>
     <div class="box-body">
-
-       <form name="trocarFoto" id="name" method="post" action="" enctype="multipart/form-data">
-         <div>
-          <input name="foto" type="file" class="form" id="foto" onfocus="this.value='';"/>      
-         </div><br /><br /><br /><br /><br /><br /><br />
-         <div>
-          <input name="tc" type="submit" class="btn btn-primary" id="tc" value="Atualizar Foto" />
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-         </div>
-        </form>
-        <?php 
-if(@$_POST["tc"]){
-  
-  if(pega_ext($_FILES["foto"]["name"]) != "jpg" and pega_ext($_FILES["foto"]["name"]) != "png" and pega_ext($_FILES["foto"]["name"]) != "gif"){
-    echo '<script type="text/javascript">alert("Sua foto deve ser no formato JPG, PNG ou GIF.");</script>';
-    echo '<script type="text/javascript">location.href="javascript: history.back(0);";</script>';
-    exit;
+     <form name="trocarFoto" id="name" method="post" action="" enctype="multipart/form-data">
+       Selecione uma imagem: <input name="arquivo" type="file" />
+     <br />
+       <input type="submit" value="Salvar" />
+    </form>
+<?php
+// verifica se foi enviado um arquivo 
+if(isset($_FILES['arquivo']['name']) && $_FILES["arquivo"]["error"] == 0)
+{
+  $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+  $nome = $_FILES['arquivo']['name'];
+  // Pega a extensao
+  $extensao = strrchr($nome, '.');
+  // Converte a extensao para mimusculo
+  $extensao = strtolower($extensao);
+  // Somente imagens, .jpg;.jpeg;.gif;.png
+  // Aqui eu enfilero as extesões permitidas e separo por ';'
+  // Isso server apenas para eu poder pesquisar dentro desta String
+  if(strstr('.jpg;.jpeg;.gif;.png', $extensao))
+  {
+    // Cria um nome único para esta imagem
+    // Evita que duplique as imagens no servidor.
+    $novoNome = md5(microtime()) . $extensao;
+    
+    // Concatena a pasta com o nome
+    $destino = '../dist/img/perfil/' . $novoNome; 
+    
+    // tenta mover o arquivo para o destino
+    if( @move_uploaded_file( $arquivo_tmp, $destino  ))
+    {
+      $InsereFoto = $PDO->query("UPDATE icbr_associado SET icbr_AssFoto='$novoNome' WHERE icbr_uid='$IDClube'");
+       if ($InsereFoto) 
+       {
+        echo '
+          <script type="text/JavaScript">alert("FOTO DE PERFIL SALVA COM SUCESSO!");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+       }
+       else{
+        echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL SALVAR FOTO DE PERFIL!");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
+       }
+    }
+    else
+        echo '<script type="text/javascript">alert("Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita! ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
   }
-  
-  if(@$_FILES["foto"]["name"] == true){
-    $foto_form = $_FILES["foto"];
-    include_once ("../config/upload.php");
-      $foto_old = upload_xy ($foto_form, $foto_form, 360, 280);
-      $thumb_old = upload_xy ($foto_form, $foto_form, 140, 90);
-      $nome_foto = md5(uniqid(time()));
-      manipulacao_img($nome_foto, $thumb_old, $foto_old);
-      $foto = $nome_foto . '.jpg';
-      $thumb = $nome_foto . '_thumb.jpg';
-  }
-
-  
-  echo '<script type="text/javascript">alert("Foto atualizada no Sistema");</script>';
-
-     $executa = $PDO->query("UPDATE icbr_associado SET icbr_AssFoto='$foto', icbr_AssThumb='$thumb' WHERE icbr_uid='$IDClube'");
-   if($executa){
-echo '
-    <script type="text/JavaScript">alert("Foto Vinculada ao Perfil");
-  location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
-   }
-   else{
-      echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
-
-   }
-  
+  else
+   echo '<script type="text/javascript">alert("ocê poderá enviar apenas arquivos \"*.jpg;*.jpeg;*.gif;*.png\"");</script>';
+   echo '<script type="text/javascript">window.close();</script>';     
 }
 ?>
-
-
 
     </div><!-- /.box-body -->
    </div>
