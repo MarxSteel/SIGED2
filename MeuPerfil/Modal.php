@@ -27,7 +27,7 @@
      if ($CryRDI === $SenhaUsuarioLogado) 
      {
       $NovoApelido = $_POST["login"];
-      $TrocaApelido = $PDO->query("UPDATE login SET login='$NovoApelido' WHERE login='$login'");
+      $TrocaApelido = $PDO->query("UPDATE login SET Nome='$NovoApelido' WHERE login='$login'");
       if ($TrocaApelido) {
        echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");location.href="dashboard.php"</script>';
       }
@@ -255,7 +255,7 @@
      $CryRDI = md5($SenhaRDI);
      if ($CryRDI === $SenhaUsuarioLogado) 
      {
-      $NovaCor = $_POST["cor"];
+      $NovaCor = $_POST["Cor"];
       $AtualizaCor = $PDO->query("UPDATE login SET color='$NovaCor' WHERE login='$login'");
       if ($AtualizaCor) {
        echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");location.href="dashboard.php"</script>';

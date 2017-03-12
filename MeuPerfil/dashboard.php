@@ -1,9 +1,7 @@
 <?php
 require("../restritos.php"); 
 require_once '../init.php';
-$PrivClubes = "active";
-$cAssociados = "active";
-$Submenu = "active";
+$cPerfil = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
 // AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
@@ -48,7 +46,7 @@ $AssI->execute();
     <!-- Profile Image -->
     <div class="box box-primary">
      <div class="box-body box-profile">
-      <img class="profile-user-img img-responsive img-circle" src="<?php echo $server; ?>/Associados/uploads/<?php echo $FotoUsuario; ?>" alt="Foto do perfil de <?php echo $uNome; ?>">
+      <img class="profile-user-img img-responsive img-circle" src="<?php echo $server; ?>/dist/img/perfil/<?php echo $FotoUsuario; ?>" alt="Foto do perfil de <?php echo $uNome; ?>">
       <h3 class="profile-username text-center"><?php echo $uNome;?></h3>
       <ul class="list-group list-group-unbordered">
        <li class="list-group-item">
@@ -120,18 +118,19 @@ $AssI->execute();
    <div class="col-md-8">
     <div class="nav-tabs-custom">
      <ul class="nav nav-tabs">
-      <li class="active"><a href="#activity" data-toggle="tab">Dados de Associado</a></li>
+      <li class="active"><a href="#settings" data-toggle="tab"> Dados de Login</a></li>
+      <li><a href="#activity" data-toggle="tab">Dados de Distrito</a></li>
       <li><a href="#timeline" data-toggle="tab">Linha do Tempo</a></li>
-      <li><a href="#settings" data-toggle="tab">Atualizar Dados de Login</a></li>
+      
      </ul>
      <div class="tab-content">
-      <div class="active tab-pane" id="activity">
-      Dados da pessoinha
+      <div class=" tab-pane" id="activity">
+      EM BREVE DADOS DO DISTRITO
       </div>
       <div class="tab-pane" id="timeline">
-      Em breve Linha do Tempo
+      EM BREVE LINHA DO TEMPO
       </div>
-      <div class="tab-pane" id="settings">
+      <div class="active  tab-pane" id="settings">
        <div class="col-xs-8">
         <li class="list-group-item">
          <b>Login do Usuário:</b> 

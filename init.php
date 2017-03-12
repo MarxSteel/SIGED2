@@ -60,3 +60,15 @@ function TiraCaractere($string) {
     // devolver a string
     return str_replace($what, $by, $string);
 }
+
+    function qrcode($url, $size){
+        if($url && $size = "105"){
+        return "http://chart.apis.google.com/chart?cht=qr&chl=".$url."&chs=".$size."x".$size."";
+        }
+        }
+
+    function qrcode2($url, $size){
+        if($url && $size = "130"){
+        return "http://chart.apis.google.com/chart?cht=qr&chl=".$url."&chs=".$size."x".$size."";
+        }
+        }
