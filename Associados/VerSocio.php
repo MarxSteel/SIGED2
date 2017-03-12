@@ -112,7 +112,7 @@ include_once '../header_top.php';
       </div>
       <div class="col-xs-4">
        <li class="list-group-item">
-        <img src="uploads/<?php echo $FotoSocio; ?>" width="140" alt="Foto">
+        <img src="<?php echo $server; ?>/dist/img/perfil/<?php echo $FotoSocio; ?>" width="140" alt="Foto">
        </li>
       </div>
      <div class="col-xs-12"> 
