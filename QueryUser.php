@@ -11,6 +11,7 @@
   $PrivANP = $row['PANP'];									//Privilégios ANP
   $SenhaUsuarioLogado = $row['senha'];
   $CodigoAssociado = $row['codAssociado'];
+  $CorPainel = $row['color'];
  
  $DadosSocio = $PDO->prepare("SELECT * FROM icbr_associado WHERE icbr_uid='$CodigoAssociado'");
  $DadosSocio->execute();

@@ -21,17 +21,6 @@
          <div class="col-xs-4">Distrito
           <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
          </div>
-         <div class="col-xs-4">Gestão
-          <input name="gestao" type="text" class="form-control" id="gestao" minlength="7" maxlength="7" required="required" placeholder="2011-12" />
-         </div>
-         <div class="col-xs-4">Tipo de Cargo
-          <select class="form-control" name="tipo" id="tipo" required="required">   
-           <option value="" checked="checked"> >><<</option>
-           <option value="1">Clube</option>
-           <option value="2">Distrito</option>
-           <option value="3">Interact Brasil</option>
-          </select>
-         </div>
          <div class="col-md-8">SELECIONE O CLUBE:
          <?php
           $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
@@ -48,22 +37,36 @@
            </select>
           </div>
          </div>
-       <div class="col-md-4">Cargo:
-        <?php
-         $ChamaCargo = "SELECT * FROM ListaCargos";
-          // seleciona os registros
-          $stmt2 = $PDO->prepare($ChamaCargo);
-          $stmt2->execute();
-        ?>
-        <div class="form-group">
-         <select class="form-control select3" name="cargo" style="width: 100%;">
-          <option value="" selected="selected">SELECIONE</option>
-          <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-          <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
-          <?php endwhile; ?>
-         </select>
-        </div>
-       </div>
+         <div class="col-md-4">GESTÃO:
+          <?php
+           $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";// seleciona os registros
+           $QryGestao = $PDO->prepare($ChamaGestao);
+           $QryGestao->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select2" name="gestao" style="width: 100%;" required>
+            <option value="" selected="selected">SELECIONE</option>
+              <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+              <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-8">Cargo:
+          <?php
+           $ChamaCargo = "SELECT * FROM ListaCargos WHERE TipoCargo=1";// seleciona os registros
+            $stmt2 = $PDO->prepare($ChamaCargo);
+            $stmt2->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select3" name="cargo" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+             <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
+             <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
          <div class="col-xs-12"><br />
           <input name="NovoCargoClube" type="submit" class="btn btn-success btn-block" id="NovoCargoClube" value="Adicionar Cargo"  />
          </div>
@@ -72,7 +75,7 @@
         if(@$_POST["NovoCargoClube"])
         {
          $Gestao = $_POST["gestao"];
-         $TipoCargo = $_POST["tipo"];
+         $TipoCargo = '1';
          $Clube = $_POST["cl"];
          $Cargo = $_POST["cargo"];
          $executa = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Clube, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Cargo', '$Clube', '$DistritoSocio', '$TipoCargo')");
@@ -88,12 +91,6 @@
          }
         }
         ?>      
-
-
-
-
-
-
        </div>
       </div>
      </div> 
@@ -106,18 +103,83 @@
         </div>
        </div>
        <div class="box-body">
-
+        <form name="NovoCargoDistrito" id="name" method="post" action="" enctype="multipart/form-data">
+         <div class="col-xs-4">Distrito
+          <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
+         </div>
+         <div class="col-md-8">SELECIONE O CLUBE:
+         <?php
+          $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
+           // seleciona os registros
+           $stmt3 = $PDO->prepare($QueryClubes3);
+           $stmt3->execute();
+         ?>
+          <div class="form-group">
+           <select class="form-control select2" name="Dcl" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+            <?php while ($r = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $r['icbr_Clube'] ?>"><?php echo $r['icbr_Clube'] ?></option>
+            <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-4">GESTÃO:
+          <?php
+           $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";// seleciona os registros
+           $QryGestao = $PDO->prepare($ChamaGestao);
+           $QryGestao->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select2" name="Dgestao" style="width: 100%;" required>
+            <option value="" selected="selected">SELECIONE</option>
+              <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+              <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-md-8">Cargo:
+          <?php
+           $ChamaCargo = "SELECT * FROM ListaCargos WHERE TipoCargo=2";// seleciona os registros
+            $stmt2 = $PDO->prepare($ChamaCargo);
+            $stmt2->execute();
+          ?>
+          <div class="form-group">
+           <select class="form-control select3" name="Dcargo" style="width: 100%;">
+            <option value="" selected="selected">SELECIONE</option>
+             <?php while ($c = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
+            <option value="<?php echo $c['NomeCargo'] ?>"><?php echo $c['NomeCargo'] ?></option>
+             <?php endwhile; ?>
+           </select>
+          </div>
+         </div>
+         <div class="col-xs-12"><br />
+          <input name="NovoCargoDistrito" type="submit" class="btn btn-warning btn-block" id="NovoCargoClube" value="Adicionar Cargo"  />
+         </div>         
+        </form>
+        <?php
+        if(@$_POST["NovoCargoDistrito"])
+        {
+         $Gestao = $_POST["Dgestao"];
+         $TipoCargo = '2';
+         $Clube = $_POST["Dcl"];
+         $Cargo = $_POST["Dcargo"];
+         $executa = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Clube, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Cargo', '$Clube', '$DistritoSocio', '$TipoCargo')");
+         if($executa)
+         {
+          echo '
+          <script type="text/JavaScript">alert("Cargo Adicionado com Sucesso");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+        }
+        ?>    
        </div>
       </div>
      </div> 
-
-
-
-
-
-
-
-
     </div><!-- /.box-body -->
    </div>
   </div>
@@ -134,54 +196,57 @@
       <h4 class="modal-title">Trocar Foto </h4>
     </div>
     <div class="box-body">
-
-       <form name="trocarFoto" id="name" method="post" action="" enctype="multipart/form-data">
-         <div>
-          <input name="foto" type="file" class="form" id="foto" onfocus="this.value='';"/>      
-         </div><br /><br /><br /><br /><br /><br /><br />
-         <div>
-          <input name="tc" type="submit" class="btn btn-primary" id="tc" value="Atualizar Foto" />
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-         </div>
-        </form>
-        <?php 
-if(@$_POST["tc"]){
-  
-  if(pega_ext($_FILES["foto"]["name"]) != "jpg" and pega_ext($_FILES["foto"]["name"]) != "png" and pega_ext($_FILES["foto"]["name"]) != "gif"){
-    echo '<script type="text/javascript">alert("Sua foto deve ser no formato JPG, PNG ou GIF.");</script>';
-    echo '<script type="text/javascript">location.href="javascript: history.back(0);";</script>';
-    exit;
+     <form name="trocarFoto" id="name" method="post" action="" enctype="multipart/form-data">
+       Selecione uma imagem: <input name="arquivo" type="file" />
+     <br />
+       <input type="submit" value="Salvar" />
+    </form>
+<?php
+// verifica se foi enviado um arquivo 
+if(isset($_FILES['arquivo']['name']) && $_FILES["arquivo"]["error"] == 0)
+{
+  $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+  $nome = $_FILES['arquivo']['name'];
+  // Pega a extensao
+  $extensao = strrchr($nome, '.');
+  // Converte a extensao para mimusculo
+  $extensao = strtolower($extensao);
+  // Somente imagens, .jpg;.jpeg;.gif;.png
+  // Aqui eu enfilero as extesões permitidas e separo por ';'
+  // Isso server apenas para eu poder pesquisar dentro desta String
+  if(strstr('.jpg;.jpeg;.gif;.png', $extensao))
+  {
+    // Cria um nome único para esta imagem
+    // Evita que duplique as imagens no servidor.
+    $novoNome = md5(microtime()) . $extensao;
+    
+    // Concatena a pasta com o nome
+    $destino = '../dist/img/perfil/' . $novoNome; 
+    
+    // tenta mover o arquivo para o destino
+    if( @move_uploaded_file( $arquivo_tmp, $destino  ))
+    {
+      $InsereFoto = $PDO->query("UPDATE icbr_associado SET icbr_AssFoto='$novoNome' WHERE icbr_uid='$IDClube'");
+       if ($InsereFoto) 
+       {
+        echo '
+          <script type="text/JavaScript">alert("FOTO DE PERFIL SALVA COM SUCESSO!");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+       }
+       else{
+        echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL SALVAR FOTO DE PERFIL!");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
+       }
+    }
+    else
+        echo '<script type="text/javascript">alert("Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita! ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
   }
-  
-  if(@$_FILES["foto"]["name"] == true){
-    $foto_form = $_FILES["foto"];
-    include_once ("../config/upload.php");
-      $foto_old = upload_xy ($foto_form, $foto_form, 360, 280);
-      $thumb_old = upload_xy ($foto_form, $foto_form, 140, 90);
-      $nome_foto = md5(uniqid(time()));
-      manipulacao_img($nome_foto, $thumb_old, $foto_old);
-      $foto = $nome_foto . '.jpg';
-      $thumb = $nome_foto . '_thumb.jpg';
-  }
-
-  
-  echo '<script type="text/javascript">alert("Foto atualizada no Sistema");</script>';
-
-     $executa = $PDO->query("UPDATE icbr_associado SET icbr_AssFoto='$foto', icbr_AssThumb='$thumb' WHERE icbr_uid='$IDClube'");
-   if($executa){
-echo '
-    <script type="text/JavaScript">alert("Foto Vinculada ao Perfil");
-  location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
-   }
-   else{
-      echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
-
-   }
-  
+  else
+   echo '<script type="text/javascript">alert("ocê poderá enviar apenas arquivos \"*.jpg;*.jpeg;*.gif;*.png\"");</script>';
+   echo '<script type="text/javascript">window.close();</script>';     
 }
 ?>
-
-
 
     </div><!-- /.box-body -->
    </div>
@@ -290,3 +355,66 @@ echo '
 <!-- FINAL DO MODAL DE DESATIVAR ASSOCIADO -->
 
 
+
+<!-- INÍCIO DO MODAL DE ADICIONAR PREMIAÇÃO DO ASSOCIADO -->
+<div clss="main-box-body clearfix">
+ <div class="modal fade" id="NovoPremio" tabindex"-1" role="dialog" aria-abeledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><code>&times;</code></span></button>
+      <h4 class="modal-title">ADICIONAR PREMIAÇÃO DE ASSOCIADO</h4>
+    </div>
+    <div class="box-body">
+    <form name="NovoPremio" id="name" method="post" action="" enctype="multipart/form-data">
+     <div class="col-xs-3">Distrito
+      <input class="form-control" disabled="disabled" TYPE="text" VALUE="<?php echo $DistritoSocio; ?>">
+     </div>
+     <div class="col-xs-6">Prêmio
+      <input class="form-control" type="text" name="premio" required">
+     </div>
+     <div class="col-md-3">GESTÃO:
+      <?php
+       $ChamaGestao = "SELECT * FROM Gestoes  ORDER BY id DESC";
+        // seleciona os registros
+        $QryGestao = $PDO->prepare($ChamaGestao);
+        $QryGestao->execute();
+       ?>
+     <div class="form-group">
+      <select class="form-control select2" name="gestao" style="width: 100%;" required>
+       <option value="" selected="selected">SELECIONE</option>
+        <?php while ($Gestao = $QryGestao->fetch(PDO::FETCH_ASSOC)): ?>
+       <option value="<?php echo $Gestao['Gestao'] ?>"><?php echo $Gestao['Gestao'] ?></option>
+       <?php endwhile; ?>
+      </select>
+     </div>
+    </div>
+    <div class="col-xs-12"><br />
+     <input name="NovoPremio" type="submit" class="btn btn-success btn-block" id="NovoCargoClube" value="ADICIONAR PREMIAÇÃO"  />
+    </div>
+    </form>
+    <?php
+     if(@$_POST["NovoPremio"])
+     {
+      $Gestao = $_POST["gestao"];
+      $Premio = $_POST["premio"];
+       $AdicionaPremio = $PDO->query("INSERT INTO icbr_historico (hist_uid, hist_Gestao, hist_Cargo, hist_Distrito, hist_Tipo) VALUES ('$IDClube', '$Gestao', '$Premio', '$Distrito', '4')");
+       if ($AdicionaPremio) 
+         {
+          echo '
+          <script type="text/JavaScript">alert("Cargo Adicionado com Sucesso");
+          location.href="VerSocio.php?ID=' . $IDClube . '"</script>';
+         }
+         else
+         {
+          echo '<script type="text/javascript">alert("Erro! ' . $PDO->errorInfo() .'");</script>';
+         }
+
+        }
+        ?>    
+    </div><!-- /.box-body -->
+   </div>
+  </div>
+ </div>
+</div>
+<!-- FINAL DO MODAL DE ADICIONAR PREMIAÇÃO DO ASSOCIADO -->
