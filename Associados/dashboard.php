@@ -112,11 +112,13 @@ $AssI->execute();
            <td>
             <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-search"></i> Ver Perfil
-            </a>                          
+            </a>
+            <a class="btn btn-info btn-sm bg-navy" href="javascript:abrir('PrintUser.php?ID=<?php echo $LinkUser; ?>');">
+             <i class="fa fa-print"> Credencial</i>
+            </a>
             <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-remove"></i>
             </a>
-            <button type="button" class="btn btn-info btn-sm bg-navy" data-toggle="modal" data-target="#Credencial"><i class="fa fa-print"></i> Credencial</button>  
            </td>
           </tr>
           <?php endwhile; ?>
