@@ -6,14 +6,25 @@ $cAssociados = "active";
 $Submenu = "active";
 $PDO = db_connect();
 require_once '../QueryUser.php';
-// AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
-$QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
-$stmt = $PDO->prepare($QueryClubes);
-$stmt->execute();
+if ($Distrito === "9999"){
+ $QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento, icbr_AssDistrito FROM icbr_associado WHERE  icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
+ $stmt = $PDO->prepare($QueryClubes);
+ $stmt->execute();
 
-$QryAssI = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='I' ORDER BY icbr_AssNome ASC";
-$AssI = $PDO->prepare($QryAssI);  //AQUI CHAMO ASSOCIADOS DESLIGADOS
-$AssI->execute();
+ $QryAssI = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento, icbr_AssDistrito FROM icbr_associado WHERE  icbr_AssStatus='I' ORDER BY icbr_AssNome ASC";
+ $AssI = $PDO->prepare($QryAssI);  //AQUI CHAMO ASSOCIADOS DESLIGADOS
+ $AssI->execute();
+}
+else{
+// AQUI DECLARO A QUERY DE DADOS DOS CLUBES:
+ $QueryClubes = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='A' ORDER BY icbr_AssNome ASC";
+  $stmt = $PDO->prepare($QueryClubes);
+  $stmt->execute();
+
+ $QryAssI = "SELECT icbr_uid, icbr_AssClube, icbr_AssNome, icbr_AssDtNascimento FROM icbr_associado WHERE icbr_AssDistrito='$Distrito' AND icbr_AssStatus='I' ORDER BY icbr_AssNome ASC";
+  $AssI = $PDO->prepare($QryAssI);  //AQUI CHAMO ASSOCIADOS DESLIGADOS
+  $AssI->execute();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,11 +101,23 @@ $AssI->execute();
         <table id="AssAtivo" class="table table-bordered table-striped table-responsive">
          <thead>
           <tr>
+           <?php
+            if ($Distrito === "9999") { ?>
+             <th>ID</th>
+             <th>Nome</th>
+             <th>Data de Nascimento</th>
+             <th>Interact Clube de</th>
+             <th>Distrito</th>
+             <th></th>
+            <?php
+            }
+            else{ ?>
            <th>ID</th>
            <th>Nome</th>
            <th>Data de Nascimento</th>
            <th>Interact Clube de</th>
            <th></th>
+           <?php } ?>
           </tr>
          </thead>
          <tbody>
@@ -109,6 +132,14 @@ $AssI->execute();
            <td><?php echo $user['icbr_AssNome'] ?></td>
            <td><?php echo $user['icbr_AssDtNascimento'] ?></td>
            <td><?php echo $user['icbr_AssClube'] ?></td>
+           <?php
+            if ($Distrito === "9999") { ?>
+           <td><?php echo $user['icbr_AssDistrito'] ?></td>
+           <?php }
+           else{
+
+           }
+?>
            <td>
             <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-search"></i> Ver Perfil
@@ -287,6 +318,12 @@ function formatar(mascara, documento){
   $(function () {
     //Initialize Select2 Elements
     $(".select4").select2();
+  });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select5").select2();
   });
 </script>
     <script type="text/javascript">

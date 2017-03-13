@@ -46,11 +46,21 @@ $AssI->execute();
    <?php
     if($PrivAssociado === '1'){
    ?> 
-
+        <div class="col-md-6">
+         <div class="box box-widget">
+          <div class="box-header with-border">
+           <div class="user-block username"><h4>Importando Lista de Associados (XLS)</h4></div>
+          </div>
+          <div class="box-body">
+           <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1veKDzKDITU" frameborder="0" allowfullscreen></iframe>
+           </div>
+          </div>
+         </div>
+        </div>
 
 
    <div class="col-xs-12">
-   CALMINHA! EM BREVE COLOCAREMOS OS MANUAIS
    <?php
     }
     else {
